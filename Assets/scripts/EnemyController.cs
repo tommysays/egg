@@ -9,18 +9,20 @@ public class EnemyController : MonoBehaviour
     public float Range;
     public int Damage;
     public float AttackSpeed;
+    public GameObject AttackPrefab;
 
     public NightController nightController;
 
     private EnemyState currentState = EnemyState.NONE;
     private float attackTimer = 0f;
+    private Vector3 destination;
 
     private SpriteRenderer spriteRenderer;
     //private bool isFlipped;
 
     void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        //isFlipped = spriteRenderer.flipX;
+        destination = new Vector3(0, -0.1f, 0);
         Flip();
     }
 
@@ -30,7 +32,6 @@ public class EnemyController : MonoBehaviour
         if (currentState == EnemyState.NONE) {
             // Approach.
             float speed = Movespeed * Time.deltaTime;
-            Vector3 destination = new Vector3(0, 0, transform.position.z);
             Vector3 nextPosition = Vector3.MoveTowards(transform.position, destination, speed);
             transform.position = nextPosition;
 
@@ -43,7 +44,10 @@ public class EnemyController : MonoBehaviour
             // Attack fire.
             attackTimer += Time.deltaTime;
             if (attackTimer > AttackSpeed) {
-                // TODO Attack animation?
+                Vector3 spawnPosition =  Vector3.MoveTowards(transform.position, destination, 0.1f);
+                GameObject attackObj = GameObject.Instantiate(AttackPrefab, new Vector3(spawnPosition.x, spawnPosition.y, -1f),
+                    Quaternion.identity);
+                attackObj.transform.right = destination - transform.position;
                 attackTimer = 0f;
                 nightController.DamageFire(Damage);
             }
