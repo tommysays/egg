@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8379744125335216103}
   - component: {fileID: 8379744125335216102}
   - component: {fileID: 8379744125335216100}
+  - component: {fileID: 7330722865865367560}
   m_Layer: 0
   m_Name: SpiderPrefab
   m_TagString: Untagged
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 0.4, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -96,9 +97,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 10
   Movespeed: 1
-  Range: 0.3
+  Range: 0.4
   Damage: 4
   AttackSpeed: 1
   AttackPrefab: {fileID: 9064330741969822626, guid: 33f37e41b6d36a541bdb9ff180e13b7e,
     type: 3}
   nightController: {fileID: 0}
+--- !u!95 &7330722865865367560
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8379744125335216105}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 03ef9869e8ac0244e82fa9fe0890f90b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
