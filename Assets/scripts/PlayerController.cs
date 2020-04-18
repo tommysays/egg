@@ -5,7 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public GameObject MeleeColliderObj;
+    public GameObject RangedAttackPrefab;
     public PlayerState currentState = PlayerState.NONE;
+
+    public int MeleeDamage;
+    public int RangedDamage;
 
     private float movespeed = 1.2f;
     private const float minX = -3f,
@@ -14,6 +18,10 @@ public class PlayerController : MonoBehaviour
                         maxY = 2f;
     private const float stunDuration = 2f;
     private const float TOLERANCE = 0.0001f;
+    private const float RANGED_X_OFFSET = 0.22f;
+    private const float RANGED_Y_OFFSET = 0.11f;
+
+    private float rangedAttackDelay = 0.4f;
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -24,6 +32,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         meleeController = MeleeColliderObj.GetComponent<MeleeController>();
+        meleeController.Damage = MeleeDamage;
     }
 
     void Update()
@@ -38,13 +47,13 @@ public class PlayerController : MonoBehaviour
             } else if (Input.GetButtonDown("Fire2")) {
                 currentState = PlayerState.ATTACKING;
                 animator.SetTrigger("rangedAttackTrigger");
+                StartCoroutine(RangedAttackSpawn());
             }
         }
     }
 
     public void DoneAttacking() {
         if (currentState == PlayerState.ATTACKING) {
-            Debug.Log("Done attacking.");
             currentState = PlayerState.NONE;
             meleeController.HasHit = false;
             meleeController.CheckForCollisions = false;
@@ -89,6 +98,23 @@ public class PlayerController : MonoBehaviour
     private IEnumerator StunTimeout() {
         yield return new WaitForSeconds(stunDuration);
         currentState = PlayerState.NONE;
+    }
+
+    private IEnumerator RangedAttackSpawn() {
+        yield return new WaitForSeconds(rangedAttackDelay);
+        if (currentState == PlayerState.STUNNED) {
+            yield break;
+        }
+        Vector3 position = transform.position;
+        float deltaX = spriteRenderer.flipX ? -RANGED_X_OFFSET : RANGED_X_OFFSET;
+        Vector3 newPosition = new Vector3(position.x + deltaX, position.y + RANGED_Y_OFFSET, position.z);
+        GameObject rangedAttack = GameObject.Instantiate(RangedAttackPrefab, newPosition, Quaternion.identity);
+        RangedAttackController controller = rangedAttack.GetComponent<RangedAttackController>();
+        if (spriteRenderer.flipX) {
+            rangedAttack.GetComponent<SpriteRenderer>().flipX = true;
+            controller.MoveLeft = true;
+        }
+        controller.Damage = RangedDamage;
     }
 
     public enum PlayerState {

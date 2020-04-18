@@ -221,7 +221,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MeleeColliderObj: {fileID: 833805457}
+  RangedAttackPrefab: {fileID: 1233508236703905780, guid: e0f0b14b5c09d96419a4462d4d224ff7,
+    type: 3}
   currentState: 0
+  MeleeDamage: 5
+  RangedDamage: 3
 --- !u!95 &763871349
 Animator:
   serializedVersion: 3
