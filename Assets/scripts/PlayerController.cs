@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject MeleeColliderObj;
     public PlayerState currentState = PlayerState.NONE;
 
     private float movespeed = 1.2f;
@@ -16,11 +17,13 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private MeleeController meleeController;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        meleeController = MeleeColliderObj.GetComponent<MeleeController>();
     }
 
     void Update()
@@ -30,6 +33,8 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Fire1")) {
                 currentState = PlayerState.ATTACKING;
                 animator.SetTrigger("attackTrigger");
+                meleeController.HasHit = false;
+                meleeController.CheckForCollisions = true;
             }
         }
     }
@@ -37,6 +42,8 @@ public class PlayerController : MonoBehaviour
     public void DoneAttacking() {
         if (currentState == PlayerState.ATTACKING) {
             currentState = PlayerState.NONE;
+            meleeController.HasHit = false;
+            meleeController.CheckForCollisions = false;
         }
     }
 
@@ -54,10 +61,14 @@ public class PlayerController : MonoBehaviour
             // Moving left, so make sure sprite is flipped.
             if (!spriteRenderer.flipX) {
                 spriteRenderer.flipX = true;
+                Vector3 position = MeleeColliderObj.transform.localPosition;
+                MeleeColliderObj.transform.localPosition = new Vector3(-position.x, position.y, position.z);
             }
         } else if (Horizontal > TOLERANCE) {
             if (spriteRenderer.flipX) {
                 spriteRenderer.flipX = false;
+                Vector3 position = MeleeColliderObj.transform.localPosition;
+                MeleeColliderObj.transform.localPosition = new Vector3(-position.x, position.y, position.z);
             }
         }
     }
