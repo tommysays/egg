@@ -13,6 +13,7 @@ public class NightController : MonoBehaviour
     {
         fireController = FireObject.GetComponent<FireController>();
         SpawnSpider();
+        SpawnSpider();
     }
 
     // Update is called once per frame
