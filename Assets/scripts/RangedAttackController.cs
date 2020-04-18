@@ -12,6 +12,7 @@ public class RangedAttackController : MonoBehaviour
     private const float LIFESPAN = 2f;
     private float currentLife = 0f;
 
+    private bool HasHit = false;
 
     void Update() {
         currentLife += Time.deltaTime;
@@ -24,9 +25,10 @@ public class RangedAttackController : MonoBehaviour
     }
 
     void OnTriggerStay2D(Collider2D collider) {
-        if (collider.gameObject.tag == "Enemy") {
+        if (!HasHit && collider.gameObject.tag == "Enemy") {
             EnemyController enemy = collider.gameObject.GetComponent<EnemyController>();
             enemy.Health -= Damage;
+            HasHit = true;
             Destroy(gameObject);
     }   }
 }
