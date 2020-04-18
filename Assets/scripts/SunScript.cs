@@ -28,8 +28,8 @@ public class SunScript : MonoBehaviour
             {
                 Moving = false;
                 transform.position = EndingPosition;
-                dayScene.canvases[3].GetComponentInChildren<Text>().text = "\tMagic Circle Max Health: " + DayScene.MaxHealth + "\n\tPouches for Sacrifices: " + DayScene.MaxAccelerant +
-                    "\n\tSacrificial Critters: " + DayScene.AccelerantInHand + "\n\tMelee Attack: " + DayScene.MeleeWeaponDmg + "\n\tRanged Attack: " + DayScene.RangeWeaponDmg;
+                dayScene.canvases[3].GetComponentInChildren<Text>().text = "\tMagic Circle Max Health: " + DayScene.MaxHealth + "\n\tHeart Pouches: " + DayScene.MaxAccelerant +
+                    "\n\tSacrificial Hearts: " + DayScene.AccelerantInHand + "\n\tMelee Attack: " + DayScene.MeleeWeaponDmg + "\n\tRanged Attack: " + DayScene.RangeWeaponDmg;
                 if (DayScene.DayTime >= DayScene.TimeinaDay)
                 {
                     dayScene.timeron = true;
