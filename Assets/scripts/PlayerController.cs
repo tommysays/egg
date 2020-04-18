@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject MeleeColliderObj;
     public PlayerState currentState = PlayerState.NONE;
 
     private float movespeed = 1.2f;
@@ -11,19 +12,38 @@ public class PlayerController : MonoBehaviour
                         minY = -2f,
                         maxX = 3f,
                         maxY = 2f;
-    private const int stunDuration = 2000;
+    private const float stunDuration = 2f;
+    private const float TOLERANCE = 0.0001f;
 
-    // Start is called before the first frame update
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+    private MeleeController meleeController;
+
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        meleeController = MeleeColliderObj.GetComponent<MeleeController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (currentState == PlayerState.NONE) {
             HandleMovement();
+            if (Input.GetButtonDown("Fire1")) {
+                currentState = PlayerState.ATTACKING;
+                animator.SetTrigger("attackTrigger");
+                meleeController.HasHit = false;
+                meleeController.CheckForCollisions = true;
+            }
+        }
+    }
+
+    public void DoneAttacking() {
+        if (currentState == PlayerState.ATTACKING) {
+            currentState = PlayerState.NONE;
+            meleeController.HasHit = false;
+            meleeController.CheckForCollisions = false;
         }
     }
 
@@ -37,6 +57,20 @@ public class PlayerController : MonoBehaviour
         newX = newX < minX ? minX : newX > maxX ? maxX : newX;
         newY = newY < minY ? minY : newY > maxY ? maxY : newY;
         transform.position = new Vector3(newX, newY, currentPosition.z);
+        if (Horizontal < -TOLERANCE) {
+            // Moving left, so make sure sprite is flipped.
+            if (!spriteRenderer.flipX) {
+                spriteRenderer.flipX = true;
+                Vector3 position = MeleeColliderObj.transform.localPosition;
+                MeleeColliderObj.transform.localPosition = new Vector3(-position.x, position.y, position.z);
+            }
+        } else if (Horizontal > TOLERANCE) {
+            if (spriteRenderer.flipX) {
+                spriteRenderer.flipX = false;
+                Vector3 position = MeleeColliderObj.transform.localPosition;
+                MeleeColliderObj.transform.localPosition = new Vector3(-position.x, position.y, position.z);
+            }
+        }
     }
 
     public void Stun() {
