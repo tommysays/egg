@@ -11,19 +11,32 @@ public class PlayerController : MonoBehaviour
                         minY = -2f,
                         maxX = 3f,
                         maxY = 2f;
-    private const int stunDuration = 2000;
+    private const float stunDuration = 2f;
+    private const float TOLERANCE = 0.0001f;
 
-    // Start is called before the first frame update
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (currentState == PlayerState.NONE) {
             HandleMovement();
+            if (Input.GetButtonDown("Fire1")) {
+                currentState = PlayerState.ATTACKING;
+                animator.SetTrigger("attackTrigger");
+            }
+        }
+    }
+
+    public void DoneAttacking() {
+        if (currentState == PlayerState.ATTACKING) {
+            currentState = PlayerState.NONE;
         }
     }
 
@@ -37,6 +50,16 @@ public class PlayerController : MonoBehaviour
         newX = newX < minX ? minX : newX > maxX ? maxX : newX;
         newY = newY < minY ? minY : newY > maxY ? maxY : newY;
         transform.position = new Vector3(newX, newY, currentPosition.z);
+        if (Horizontal < -TOLERANCE) {
+            // Moving left, so make sure sprite is flipped.
+            if (!spriteRenderer.flipX) {
+                spriteRenderer.flipX = true;
+            }
+        } else if (Horizontal > TOLERANCE) {
+            if (spriteRenderer.flipX) {
+                spriteRenderer.flipX = false;
+            }
+        }
     }
 
     public void Stun() {
