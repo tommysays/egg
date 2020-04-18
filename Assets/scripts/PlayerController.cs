@@ -35,15 +35,21 @@ public class PlayerController : MonoBehaviour
                 animator.SetTrigger("attackTrigger");
                 meleeController.HasHit = false;
                 meleeController.CheckForCollisions = true;
+            } else if (Input.GetButtonDown("Fire2")) {
+                currentState = PlayerState.ATTACKING;
+                animator.SetTrigger("rangedAttackTrigger");
             }
         }
     }
 
     public void DoneAttacking() {
         if (currentState == PlayerState.ATTACKING) {
+            Debug.Log("Done attacking.");
             currentState = PlayerState.NONE;
             meleeController.HasHit = false;
             meleeController.CheckForCollisions = false;
+        } else {
+            Debug.LogWarning("Stopped attack without actually attacking?");
         }
     }
 
