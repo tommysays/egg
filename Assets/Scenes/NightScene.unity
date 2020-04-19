@@ -313,6 +313,7 @@ MonoBehaviour:
   MaxFireValue: 100
   CurrentHearts: 0
   MaxHearts: 3
+  BuffCost: 15
 --- !u!4 &630007197
 Transform:
   m_ObjectHideFlags: 0

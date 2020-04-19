@@ -25,7 +25,6 @@ public class FireMeterController : MonoBehaviour
 
             if (isChanging) {
                 // If we're mid-change, we should set the current lerp as the last value.
-                Debug.Log("Changing fire meter mid-change.");
                 lastValue = Mathf.Lerp(lastValue, _nextValue, changeTimer / changeDuration);
             } else {
                 lastValue = _nextValue;

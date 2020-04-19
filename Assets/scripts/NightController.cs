@@ -14,6 +14,7 @@ public class NightController : MonoBehaviour
     public int CurrentHearts;
     public int MaxHearts;
     private int HeartRecoveryAmount = 20;
+    public int BuffCost = 15;
 
     public int FireValue {
         get {
@@ -72,5 +73,13 @@ public class NightController : MonoBehaviour
         }
         CurrentHearts--;
         FireValue += HeartRecoveryAmount;
+    }
+
+    public bool SpendFireForBuff() {
+        if (FireValue > BuffCost) {
+            FireValue -= BuffCost;
+            return true;
+        }
+        return false;
     }
 }
