@@ -56,6 +56,13 @@ public class DayScene : MonoBehaviour
 
     public bool EggWiggling = false;
 
+    public bool FinalTransition = false;
+    public float FinalTransitionTimer = 0.0f;
+    public float LagFinalTransitionTime = 3.0f;
+    public GameObject[] ObjectsMovingInFinalTransition;
+    List<float> ObjectFinalTransitionXoffset = new List<float>();
+    List<float> ObjectFinalTransitionYoffset = new List<float>();
+
 
 
 
@@ -85,6 +92,31 @@ public class DayScene : MonoBehaviour
         EggWiggle = new Vector3(EggStart.x + Random.Range(-2f, 2f), EggStart.y + Random.Range(-1f, 1f), EggStart.z);
         EggPriorLocation = EggStart;
         EggWiggling = false;
+        FinalTransition = false;
+        FinalTransitionTimer = 0.0f;
+        LagFinalTransitionTime = 3.0f;
+        ObjectFinalTransitionXoffset.Clear();
+        ObjectFinalTransitionYoffset.Clear();
+        for (int x = 0; x < ObjectsMovingInFinalTransition.Length; x++)
+        {
+            ObjectFinalTransitionXoffset.Add(0f);
+            ObjectFinalTransitionYoffset.Add(0f);
+            FinalTransitionOffset(x);
+
+        }
+
+}
+
+
+
+public void FinalTransitionOffset(int x)
+    {
+        Vector3 vector3;
+        vector3 = new Vector3(EggStart.x - ObjectsMovingInFinalTransition[x].transform.localPosition.x, EggStart.y - ObjectsMovingInFinalTransition[x].transform.localPosition.y, EggStart.z - ObjectsMovingInFinalTransition[x].transform.localPosition.z);
+
+        ObjectFinalTransitionXoffset[x] =  ObjectsMovingInFinalTransition[x].transform.localPosition.x - EggStart.x;
+        ObjectFinalTransitionYoffset[x] = ObjectsMovingInFinalTransition[x].transform.localPosition.y - EggStart.y;
+
     }
 
 
@@ -138,7 +170,7 @@ public class DayScene : MonoBehaviour
     void Update()
     {
 
-        if (CanvasHoverState == CanvasHoverStates.GoingUp)
+        if (CanvasHoverState == CanvasHoverStates.GoingUp && (DayTime < TimeinaDay))
         {
             CanvasHoverTimer += Time.deltaTime;
             if (CanvasHoverTimer >= LagCanvasHoverTimer)
@@ -146,22 +178,23 @@ public class DayScene : MonoBehaviour
                 CanvasHoverTimer = 0.0f;
                 CanvasHoverState = CanvasHoverStates.GoingDown;
                 float x = Random.Range(0, 3);
-                if (x > 1) 
+                if (x > 1)
                 {
                     EggPriorLocation = Egg.transform.localPosition;
                     EggWiggle = new Vector3(EggStart.x + Random.Range(-3f, 3f), EggStart.y, EggStart.z);
                     EggWiggling = true;
                 }
-                
+
             }
-            else 
+            else
             {
                 canvases[SelectedPanelNumber].transform.localPosition = Vector3.Lerp(OffsetVector(CanvasHoverStartingY), OffsetVector(CanvasHoverEndingY), CanvasHoverTimer / LagCanvasHoverTimer);
-                
+
                 SelectPanel.transform.localPosition = canvases[SelectedPanelNumber].transform.localPosition;
                 CorrectSelectorIcon();
             }
-        } else if (CanvasHoverState == CanvasHoverStates.GoingDown)
+        }
+        else if (CanvasHoverState == CanvasHoverStates.GoingDown && (DayTime < TimeinaDay))
         {
             if (EggWiggling)
             {
@@ -184,14 +217,16 @@ public class DayScene : MonoBehaviour
             CorrectSelectorIcon();
         }
 
-        
+
         if (timeron)
         {
             LERPtimer += Time.deltaTime;
             if (LERPtimer >= LagTimeFade)
             {
                 timeron = false;
-                Fade();
+                FinalTransition = true;
+                texts[0].text = "Night Arrives";
+
 
             }
             else
@@ -205,11 +240,11 @@ public class DayScene : MonoBehaviour
         if (TimeinaDay <= DayTime)
         {
             texts[0].text = " Night " + Day + " Arrives"; ;
-           
+
         }
         else
         {
-            texts[0].text = " Day " + Day + " -- " + (TimeinaDay-DayTime) + " Hours Until Nightfall"; ;
+            texts[0].text = " Day " + Day + " -- " + (TimeinaDay - DayTime) + " Hours Until Nightfall"; ;
             if ((TimeinaDay - DayTime) == 1)
             {
                 texts[0].text = " Day " + Day + " -- " + "1 Hour Until Nightfall"; ;
@@ -233,7 +268,7 @@ public class DayScene : MonoBehaviour
             else if ((SelectState == SelectStates.FadingOut) && (SelectPanelTimer < SelectPanelFadeTime))
             {
                 SelectPanel.GetComponent<Image>().color = Color32.Lerp(StartingSelectColor, EndingSelectColor, SelectPanelTimer / SelectPanelFadeTime);
-                SelectorIcon.GetComponent<Image>().color = Color32.Lerp(new Color32(255,255,255,255), new Color32(255, 255, 255, 0), SelectPanelTimer / SelectPanelFadeTime);
+                SelectorIcon.GetComponent<Image>().color = Color32.Lerp(new Color32(255, 255, 255, 255), new Color32(255, 255, 255, 0), SelectPanelTimer / SelectPanelFadeTime);
             }
             else if ((SelectState == SelectStates.FadingIn) && (SelectPanelTimer >= SelectPanelFadeTime))
             {
@@ -267,7 +302,7 @@ public class DayScene : MonoBehaviour
 
                 SelectedPanelNumber = 1;
                 SelectPanel.transform.localPosition = canvases[1].transform.localPosition;
-              }
+            }
             else if (SelectedPanelNumber == 1)
             {
                 SelectedPanelNumber = 2;
@@ -291,7 +326,7 @@ public class DayScene : MonoBehaviour
                 SelectedPanelNumber = 4;
 
                 SelectPanel.transform.localPosition = canvases[4].transform.localPosition;
-                
+
             }
             else if (SelectedPanelNumber == 4)
             {
@@ -301,7 +336,8 @@ public class DayScene : MonoBehaviour
             }
             CorrectSelectorIcon();
 
-        }else if (Input.GetKeyUp("w") && canvases[5].GetComponentInChildren<SunScript>().Moving == false)
+        }
+        else if (Input.GetKeyUp("w") && canvases[5].GetComponentInChildren<SunScript>().Moving == false)
         {
             canvases[SelectedPanelNumber].transform.localPosition = OffsetVector(CanvasHoverStartingY);
 
@@ -347,6 +383,32 @@ public class DayScene : MonoBehaviour
 
 
 
+        //Final Scene Timer (moves visible objects like egg to center of screen
+
+        if (FinalTransition)
+        {
+            FinalTransitionTimer += Time.deltaTime;
+            if (FinalTransitionTimer >= LagFinalTransitionTime)
+            {
+                //FinalTransition = false;
+                Fade();
+
+            }
+            else
+            {
+                Egg.transform.localPosition = Vector3.Lerp(EggPriorLocation, new Vector3(0, 0, 0), FinalTransitionTimer / LagFinalTransitionTime);
+
+                for (int x = 0; x < ObjectsMovingInFinalTransition.Length; x++)
+                {
+                    Vector3 startVector = new Vector3(EggPriorLocation.x + ObjectFinalTransitionXoffset[x], EggPriorLocation.y + ObjectFinalTransitionYoffset[x], 0);
+                    Vector3 endVector = new Vector3(0 + ObjectFinalTransitionXoffset[x], 0 + ObjectFinalTransitionYoffset[x], 0);
+                    ObjectsMovingInFinalTransition[x].transform.localPosition = Vector3.Lerp(startVector, endVector, FinalTransitionTimer / LagFinalTransitionTime);
+                }
+
+                EggWiggling = false;
+                CanvasHoverTimer = 0.0f;
+            }
+        }
     }
 
     public void MakeSelection(DayChoice dayChoice)
@@ -453,9 +515,12 @@ public class DayScene : MonoBehaviour
         vector3.y = SelectPanel.transform.localPosition.y;
         SelectorIcon.transform.localPosition = vector3;
     }
+
     public void Fade()
     {
-        texts[0].text = "Night Arrives";
+        
+
+
 
         //return to night scene
     }
