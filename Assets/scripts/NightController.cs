@@ -55,7 +55,7 @@ public class NightController : MonoBehaviour
     private void SpawnSpider() {
         float x = Random.value < 0.5f ? -3 : 3;
         float y = Random.Range(-2f, 2f);
-        Vector3 spawnPosition = new Vector3(x, y, 0);
+        Vector3 spawnPosition = new Vector3(x, y, y);
         GameObject spider = GameObject.Instantiate(SpiderPrefab, spawnPosition, Quaternion.identity);
         EnemyController enemyController = spider.GetComponent<EnemyController>();
         enemyController.nightController = this;

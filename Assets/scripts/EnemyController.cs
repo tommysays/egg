@@ -61,8 +61,7 @@ public class EnemyController : MonoBehaviour
                 attackTimer += Time.deltaTime;
                 if (attackTimer > AttackSpeed) {
                     Vector3 spawnPosition =  Vector3.MoveTowards(transform.position, destination, 0.1f);
-                    GameObject attackObj = GameObject.Instantiate(AttackPrefab, new Vector3(spawnPosition.x, spawnPosition.y, -1f),
-                        Quaternion.identity);
+                    GameObject attackObj = GameObject.Instantiate(AttackPrefab, spawnPosition, Quaternion.identity);
                     attackObj.transform.right = destination - transform.position;
                     attackTimer = 0f;
                     nightController.DamageFire(Damage);

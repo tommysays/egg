@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
         float newY = currentPosition.y + movement.y;
         newX = newX < minX ? minX : newX > maxX ? maxX : newX;
         newY = newY < minY ? minY : newY > maxY ? maxY : newY;
-        transform.position = new Vector3(newX, newY, currentPosition.z);
+        transform.position = new Vector3(newX, newY, newY);
         if (Horizontal < -TOLERANCE) {
             // Moving left, so make sure sprite is flipped.
             if (!spriteRenderer.flipX) {
