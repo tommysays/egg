@@ -39,7 +39,6 @@ public class EnemyController : MonoBehaviour
     protected float deathFadeSeconds = 0.25f;
 
     protected SpriteRenderer spriteRenderer;
-    //private bool isFlipped;
 
     public virtual void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -69,7 +68,6 @@ public class EnemyController : MonoBehaviour
                     Vector3 spawnPosition =  Vector3.MoveTowards(transform.position, destination, AttackSpawnDistance);
                     Vector3 delta = destination - transform.position;
                     GameObject attackObj = GameObject.Instantiate(AttackPrefab, spawnPosition, Quaternion.identity);
-                    //attackObj.transform.right = destination - transform.position;
                     float angle = Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg;
                     attackObj.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                     attackTimer = 0f;
