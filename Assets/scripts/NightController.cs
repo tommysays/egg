@@ -5,7 +5,7 @@ using UnityEngine;
 public class NightController : MonoBehaviour
 {
     public GameObject FireObj;
-    public GameObject SpiderPrefab;
+    public GameObject[] EnemyPrefabs;
     public GameObject FireMeterObj;
     private FireController fireController;
 
@@ -43,8 +43,9 @@ public class NightController : MonoBehaviour
         fireMeterController = FireMeterObj.GetComponent<FireMeterController>();
         fireMeterController.MaxValue = MaxFireValue;
         FireValue = MaxFireValue;
-        SpawnSpider();
-        SpawnSpider();
+        SpawnFromSide(EnemyPrefabs[0]);
+        SpawnFromSide(EnemyPrefabs[0]);
+        SpawnFromSide(EnemyPrefabs[1]);
     }
 
     // Update is called once per frame
@@ -53,11 +54,11 @@ public class NightController : MonoBehaviour
         
     }
 
-    private void SpawnSpider() {
+    private void SpawnFromSide(GameObject prefab) {
         float x = Random.value < 0.5f ? -3 : 3;
         float y = Random.Range(-2f, 2f);
         Vector3 spawnPosition = new Vector3(x, y, y);
-        GameObject spider = GameObject.Instantiate(SpiderPrefab, spawnPosition, Quaternion.identity);
+        GameObject spider = GameObject.Instantiate(prefab, spawnPosition, Quaternion.identity);
         EnemyController enemyController = spider.GetComponent<EnemyController>();
         enemyController.nightController = this;
     }

@@ -307,8 +307,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FireObj: {fileID: 2061885110}
-  SpiderPrefab: {fileID: 8379744125335216105, guid: c41cea5e97e12304384686871ab37083,
-    type: 3}
+  EnemyPrefabs:
+  - {fileID: 8379744125335216105, guid: c41cea5e97e12304384686871ab37083, type: 3}
+  - {fileID: 1290033946712388244, guid: d8d51b57b60042e4c81ba651eab9f409, type: 3}
   FireMeterObj: {fileID: 942802978}
   MaxFireValue: 100
   CurrentHearts: 0
