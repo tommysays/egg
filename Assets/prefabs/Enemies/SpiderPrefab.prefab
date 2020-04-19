@@ -97,13 +97,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12759d24b48e0694cad563820cd49923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 5
+  MaxHealth: 4
   Movespeed: 1
   Range: 0.4
   Damage: 4
   AttackSpeed: 1
   AttackPrefab: {fileID: 9064330741969822626, guid: 33f37e41b6d36a541bdb9ff180e13b7e,
     type: 3}
+  AttackSpawnDistance: 0.1
   nightController: {fileID: 0}
 --- !u!95 &7330722865865367560
 Animator:

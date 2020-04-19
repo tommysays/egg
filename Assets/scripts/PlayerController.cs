@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
                 meleeController.HasHit = false;
                 meleeController.CheckForCollisions = true;
                 // Update damage in case this is a buffed attack.
-                meleeController.Damage = (int)(MeleeDamage * (hasBuff ? BUFF_MULTIPLIER : 1));
+                meleeController.Damage = (int)Mathf.Round(MeleeDamage * (hasBuff ? BUFF_MULTIPLIER : 1));
             } else if (Input.GetButtonDown("Fire2")) {
                 currentState = PlayerState.ATTACKING;
                 if (hasBuff) {
@@ -170,7 +170,8 @@ public class PlayerController : MonoBehaviour
             rangedAttack.GetComponent<SpriteRenderer>().flipX = true;
             controller.MoveLeft = true;
         }
-        controller.Damage = (int)(RangedDamage * (isBuffed ? BUFF_MULTIPLIER : 1));
+        int newdmg = (int)Mathf.Round(RangedDamage * (isBuffed ? BUFF_MULTIPLIER : 1));
+        controller.Damage = (int)Mathf.Round(RangedDamage * (isBuffed ? BUFF_MULTIPLIER : 1));
     }
 
     private IEnumerator SacrificeDelay() {
