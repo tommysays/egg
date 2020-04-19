@@ -24,6 +24,8 @@ public class EnemyController : MonoBehaviour
     public int Damage;
     public float AttackSpeed;
     public GameObject AttackPrefab;
+    /// For determining how far in front of the enemy the attack animation should spawn.
+    public float AttackSpawnDistance = 0.1f;
 
     public NightController nightController;
 
@@ -62,9 +64,12 @@ public class EnemyController : MonoBehaviour
                 // Attack fire.
                 attackTimer += Time.deltaTime;
                 if (attackTimer > AttackSpeed) {
-                    Vector3 spawnPosition =  Vector3.MoveTowards(transform.position, destination, 0.1f);
+                    Vector3 spawnPosition =  Vector3.MoveTowards(transform.position, destination, AttackSpawnDistance);
+                    Vector3 delta = destination - transform.position;
                     GameObject attackObj = GameObject.Instantiate(AttackPrefab, spawnPosition, Quaternion.identity);
-                    attackObj.transform.right = destination - transform.position;
+                    //attackObj.transform.right = destination - transform.position;
+                    float angle = Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg;
+                    attackObj.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                     attackTimer = 0f;
                     nightController.DamageFire(Damage);
                 }
