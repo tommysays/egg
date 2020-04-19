@@ -8,9 +8,13 @@ public class NightController : MonoBehaviour
     public GameObject SpiderPrefab;
     private FireController fireController;
 
+    public int CurrentHearts;
+    public int MaxHearts;
+
     // Start is called before the first frame update
     void Start()
     {
+        CurrentHearts = MaxHearts;
         fireController = FireObject.GetComponent<FireController>();
         SpawnSpider();
         SpawnSpider();
@@ -33,5 +37,14 @@ public class NightController : MonoBehaviour
 
     public void DamageFire(int damage) {
         fireController.CurrentValue -= damage;
+    }
+
+    public void SacrificeHeart() {
+        if (CurrentHearts <= 0) {
+            Debug.LogWarning($"Failed to sacrifice heart - not enough hearts! (${CurrentHearts} / ${MaxHearts}");
+            return;
+        }
+        CurrentHearts--;
+        fireController.CurrentValue += 20;
     }
 }
