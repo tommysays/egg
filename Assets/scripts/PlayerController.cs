@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject MeleeColliderObj;
     public GameObject RangedAttackPrefab;
+    public GameObject NightControllerObj;
     public PlayerState currentState = PlayerState.NONE;
 
     public int MeleeDamage;
@@ -22,13 +23,16 @@ public class PlayerController : MonoBehaviour
     private const float RANGED_Y_OFFSET = 0.11f;
 
     private float rangedAttackDelay = 0.4f;
+    private float sacrificeDelay = 0.5f;
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private MeleeController meleeController;
+    private NightController nightController;
 
     void Start()
     {
+        nightController = NightControllerObj.GetComponent<NightController>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         meleeController = MeleeColliderObj.GetComponent<MeleeController>();
@@ -48,6 +52,10 @@ public class PlayerController : MonoBehaviour
                 currentState = PlayerState.ATTACKING;
                 animator.SetTrigger("rangedAttackTrigger");
                 StartCoroutine(RangedAttackSpawn());
+            } else if (Input.GetButtonDown("Fire3") && nightController.CurrentHearts > 0) {
+                currentState = PlayerState.SACRIFICING;
+                animator.SetTrigger("sacrificeTrigger");
+                StartCoroutine(SacrificeDelay());
             }
         }
     }
@@ -59,6 +67,14 @@ public class PlayerController : MonoBehaviour
             meleeController.CheckForCollisions = false;
         } else {
             Debug.LogWarning("Stopped attack without actually attacking?");
+        }
+    }
+
+    public void DoneSacrificing() {
+        if (currentState == PlayerState.SACRIFICING) {
+            currentState = PlayerState.NONE;
+        } else {
+            Debug.LogWarning("Animator triggered stop sacrifice, but player was not sacrificing. PlayerState = " + currentState.ToString());
         }
     }
 
@@ -102,7 +118,8 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator RangedAttackSpawn() {
         yield return new WaitForSeconds(rangedAttackDelay);
-        if (currentState == PlayerState.STUNNED) {
+        if (currentState != PlayerState.ATTACKING) {
+            // Player was interrupted before they could complete ranged attack.
             yield break;
         }
         Vector3 position = transform.position;
@@ -117,9 +134,19 @@ public class PlayerController : MonoBehaviour
         controller.Damage = RangedDamage;
     }
 
+    private IEnumerator SacrificeDelay() {
+        yield return new WaitForSeconds(sacrificeDelay);
+        if (currentState != PlayerState.SACRIFICING) {
+            // Player was interrupted before they could complete sacrifice.
+            yield break;
+        }
+        nightController.SacrificeHeart();
+    }
+
     public enum PlayerState {
         NONE,
         ATTACKING,
+        SACRIFICING,
         STUNNED
     };
 }

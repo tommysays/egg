@@ -223,6 +223,7 @@ MonoBehaviour:
   MeleeColliderObj: {fileID: 833805457}
   RangedAttackPrefab: {fileID: 1233508236703905780, guid: e0f0b14b5c09d96419a4462d4d224ff7,
     type: 3}
+  NightControllerObj: {fileID: 0}
   currentState: 0
   MeleeDamage: 5
   RangedDamage: 3
