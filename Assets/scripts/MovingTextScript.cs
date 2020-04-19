@@ -10,10 +10,13 @@ public class MovingTextScript : MonoBehaviour
     public float LerpTime = 0.0f;
     public float LagTime = 1.5f;
     public static bool IsMoving = false;
+    public DayScene dayScene;
+    public int MovingDays = 0;
 
     void Start()
     {
-        
+        dayScene = FindObjectOfType<DayScene>();
+
     }
 
     // Update is called once per frame
@@ -27,18 +30,24 @@ public class MovingTextScript : MonoBehaviour
                 IsMoving = false;
                 transform.position = EndingPosition;
                 this.GetComponent<Text>().color = new Color32(50, 50, 50, 0);
-
+                dayScene.StartBackgroundColor = dayScene.canvases[9].GetComponent<Image>().color;
+                dayScene.canvases[3].GetComponentInChildren<Text>().text = "\tMagic Circle Max Health: " + DayScene.MaxHealth + "\n\tHeart Pouches: " + DayScene.MaxAccelerant +
+    "\n\tSacrificial Hearts: " + DayScene.AccelerantInHand + "\n\tMelee Attack: " + DayScene.MeleeWeaponDmg + "\n\tRanged Attack: " + DayScene.RangeWeaponDmg;
             }
             else
             {
                 transform.position = Vector3.Lerp(StartingPosition, EndingPosition, LerpTime / LagTime);
+                dayScene.canvases[9].GetComponent<Image>().color = Color32.Lerp(dayScene.StartBackgroundColor, dayScene.EndBackgroundColor, (  (LerpTime / 1.5f) * MovingDays / DayScene.TimeinaDay));
+
             }
         }
+        
     }
 
 
-    public void Move(Vector3 Start, float timelag, Vector3 end)
+    public void Move(Vector3 Start, float timelag, Vector3 end, int days)
     {
+        MovingDays = days;
         this.transform.position = Start;
         LagTime = timelag;
         StartingPosition = this.transform.position;
