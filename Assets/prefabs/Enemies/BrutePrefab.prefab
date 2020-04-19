@@ -107,6 +107,7 @@ MonoBehaviour:
     type: 3}
   AttackSpawnDistance: 0.2
   nightController: {fileID: 0}
+  currentState: 0
 --- !u!61 &8319139162563143155
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151,7 +152,7 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!95 &928436037
