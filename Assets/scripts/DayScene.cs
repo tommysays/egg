@@ -48,6 +48,15 @@ public class DayScene : MonoBehaviour
     public Color32 EndBackgroundColor = new Color32(45, 79, 119, 255);
     public GameObject BackUpPanel;
 
+    public GameObject Egg;
+    public Sprite[] eggSprites;
+    public Vector3 EggStart;
+    public Vector3 EggPriorLocation;
+    public Vector3 EggWiggle;
+
+    public bool EggWiggling = false;
+
+
 
 
 
@@ -56,7 +65,7 @@ public class DayScene : MonoBehaviour
     public void Reset()
     {
         DayTime = 0;
-             this.canvases[3].GetComponentInChildren<Text>().text = "" + "\tMagic Circle Max Health: " + DayScene.MaxHealth + "\n\tHeart Pouches: " + DayScene.MaxAccelerant +
+        this.canvases[3].GetComponentInChildren<Text>().text = "" + "\tMagic Circle Max Health: " + DayScene.MaxHealth + "\n\tHeart Pouches: " + DayScene.MaxAccelerant +
              "\n\tSacrificial Hearts: " + DayScene.AccelerantInHand + "\n\tMelee Attack: " + DayScene.MeleeWeaponDmg + "\n\tRanged Attack: " + DayScene.RangeWeaponDmg;
         SpeedBonus = (TimeinaDay - DayScene.DayTime) * 10;
         this.canvases[4].GetComponentInChildren<Text>().text = "Rest Until Dawn\n(Gain Temporary " + DayScene.SpeedBonus + "% Speed Bonus)";
@@ -71,6 +80,11 @@ public class DayScene : MonoBehaviour
         CanvasHoverState = CanvasHoverStates.GoingUp;
         CanvasHoverStartingY = canvases[0].transform.localPosition.y;
         CanvasHoverEndingY = CanvasHoverStartingY + (canvases[0].GetComponent<RectTransform>().rect.height/15);
+        Egg.GetComponent<Image>().sprite = eggSprites[Day];
+        EggStart = Egg.transform.localPosition;
+        EggWiggle = new Vector3(EggStart.x + Random.Range(-2f, 2f), EggStart.y + Random.Range(-1f, 1f), EggStart.z);
+        EggPriorLocation = EggStart;
+        EggWiggling = false;
     }
 
 
@@ -118,7 +132,7 @@ public class DayScene : MonoBehaviour
     {
         Reset();
        // FadeCanvasStartingColor = new Color32(129, 218, 255, 251);
-
+      
     }
 
     void Update()
@@ -131,30 +145,46 @@ public class DayScene : MonoBehaviour
             {
                 CanvasHoverTimer = 0.0f;
                 CanvasHoverState = CanvasHoverStates.GoingDown;
+                float x = Random.Range(0, 3);
+                if (x > 1) 
+                {
+                    EggPriorLocation = Egg.transform.localPosition;
+                    EggWiggle = new Vector3(EggStart.x + Random.Range(-3f, 3f), EggStart.y, EggStart.z);
+                    EggWiggling = true;
+                }
+                
             }
             else 
             {
                 canvases[SelectedPanelNumber].transform.localPosition = Vector3.Lerp(OffsetVector(CanvasHoverStartingY), OffsetVector(CanvasHoverEndingY), CanvasHoverTimer / LagCanvasHoverTimer);
+                
                 SelectPanel.transform.localPosition = canvases[SelectedPanelNumber].transform.localPosition;
                 CorrectSelectorIcon();
             }
         } else if (CanvasHoverState == CanvasHoverStates.GoingDown)
         {
+            if (EggWiggling)
+            {
+                Egg.transform.localPosition = Vector3.Lerp(EggPriorLocation, EggWiggle, CanvasHoverTimer / LagCanvasHoverTimer);
+            }
             CanvasHoverTimer += Time.deltaTime;
             if (CanvasHoverTimer >= LagCanvasHoverTimer)
             {
                 CanvasHoverTimer = 0.0f;
                 CanvasHoverState = CanvasHoverStates.GoingUp;
+                EggWiggling = false;
             }
             else
             {
 
                 canvases[SelectedPanelNumber].transform.localPosition = Vector3.Lerp(OffsetVector(CanvasHoverEndingY), OffsetVector(CanvasHoverStartingY), CanvasHoverTimer / LagCanvasHoverTimer);
                 SelectPanel.transform.localPosition = canvases[SelectedPanelNumber].transform.localPosition;
+
             }
             CorrectSelectorIcon();
         }
 
+        
         if (timeron)
         {
             LERPtimer += Time.deltaTime;
