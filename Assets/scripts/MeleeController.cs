@@ -19,6 +19,9 @@ public class MeleeController : MonoBehaviour
         }
         if (collider.gameObject.tag == "Enemy") {
             EnemyController enemy = collider.gameObject.GetComponent<EnemyController>();
+            if (enemy.currentState == EnemyController.EnemyState.DYING) {
+                return;
+            }
             HasHit = true;
             enemy.Health -= Damage;
         }

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public GameObject RangedAttackBuffedPrefab;
     public GameObject NightControllerObj;
     public GameObject BuffBarObj;
+    public GameObject PlayerSpriteObj;
     public PlayerState currentState = PlayerState.NONE;
 
     public int MeleeDamage;
@@ -22,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private const float stunDuration = 2f;
     private const float TOLERANCE = 0.0001f;
     private const float RANGED_X_OFFSET = 0.22f;
-    private const float RANGED_Y_OFFSET = 0.11f;
+    private const float RANGED_Y_OFFSET = 0.41f;
 
     private float rangedAttackDelay = 0.4f;
     private float sacrificeDelay = 0.5f;
@@ -40,8 +41,8 @@ public class PlayerController : MonoBehaviour
 
     void Start() {
         nightController = NightControllerObj.GetComponent<NightController>();
+        spriteRenderer = PlayerSpriteObj.GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         meleeController = MeleeColliderObj.GetComponent<MeleeController>();
         buffBarController = BuffBarObj.GetComponent<BuffBarController>();
         buffBarController.buffDuration = buffDuration;

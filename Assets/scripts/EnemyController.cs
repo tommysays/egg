@@ -19,6 +19,8 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+    private int _health;
+
     public int MaxHealth;
     public float Movespeed;
     public float Range;
@@ -31,16 +33,14 @@ public class EnemyController : MonoBehaviour
     public NightController nightController;
 
     public EnemyState currentState = EnemyState.NONE;
-    private float attackTimer = 0f;
-    private int _health;
-    private Vector3 destination;
-    private float deathFadeTimer = 0f;
-    private float deathFadeSeconds = 0.25f;
+    protected float attackTimer = 0f;
+    protected Vector3 destination;
+    protected float deathFadeTimer = 0f;
+    protected float deathFadeSeconds = 0.25f;
 
-    private SpriteRenderer spriteRenderer;
-    //private bool isFlipped;
+    protected SpriteRenderer spriteRenderer;
 
-    void Start() {
+    public virtual void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
         destination = new Vector3(0, -0.1f, 0);
         Health = MaxHealth;
@@ -48,7 +48,7 @@ public class EnemyController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         switch (currentState) {
             case EnemyState.NONE:
@@ -68,7 +68,6 @@ public class EnemyController : MonoBehaviour
                     Vector3 spawnPosition =  Vector3.MoveTowards(transform.position, destination, AttackSpawnDistance);
                     Vector3 delta = destination - transform.position;
                     GameObject attackObj = GameObject.Instantiate(AttackPrefab, spawnPosition, Quaternion.identity);
-                    //attackObj.transform.right = destination - transform.position;
                     float angle = Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg;
                     attackObj.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                     attackTimer = 0f;
@@ -100,6 +99,7 @@ public class EnemyController : MonoBehaviour
 
     public enum EnemyState {
         NONE,
+        SPAWNING,
         REACHED_FIRE,
         DYING
     }

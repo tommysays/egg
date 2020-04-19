@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NightController : MonoBehaviour
 {
@@ -10,10 +11,25 @@ public class NightController : MonoBehaviour
     private FireController fireController;
     private FireMeterController fireMeterController;
     public TextAsset[] Levels;
+    public Text HeartText;
 
     public int MaxFireValue;
 
-    public int CurrentHearts;
+    public int CurrentHearts {
+        get {
+            return _currentHearts;
+        }
+        set {
+            if (value < 0) {
+                value = 0;
+            } else if (value > MaxHearts) {
+                value = MaxHearts;
+            }
+            _currentHearts = value;
+            HeartText.text = value.ToString();
+        }
+    }
+    private int _currentHearts;
     public int MaxHearts;
     private int HeartRecoveryAmount = 20;
     public int BuffCost = 15;
@@ -23,6 +39,9 @@ public class NightController : MonoBehaviour
             return _fireValue;
         }
         set {
+            if (hasWon || hasLost) {
+                return;
+            }
             if (value > MaxFireValue) {
                 value = MaxFireValue;
             } else if (value < 0) {
@@ -38,7 +57,6 @@ public class NightController : MonoBehaviour
 
     // Only enabled when the last monster spawns.
     public bool canWin = false;
-    // Prevents the win from triggering multiple times.
     public bool hasWon = false;
     public bool hasLost = false;
     private float winDelay = 1f;
