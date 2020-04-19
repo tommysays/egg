@@ -4,18 +4,44 @@ using UnityEngine;
 
 public class NightController : MonoBehaviour
 {
-    public GameObject FireObject;
+    public GameObject FireObj;
     public GameObject SpiderPrefab;
+    public GameObject FireMeterObj;
     private FireController fireController;
+
+    public int MaxFireValue;
 
     public int CurrentHearts;
     public int MaxHearts;
+    private int HeartRecoveryAmount = 20;
+
+    public int FireValue {
+        get {
+            return _fireValue;
+        }
+        set {
+            if (value > MaxFireValue) {
+                value = MaxFireValue;
+            } else if (value < 0) {
+                value = 0;
+            }
+            fireController.CurrentValue = value;
+            fireMeterController.NextValue = value;
+            _fireValue = value;
+        }
+    }
+    private int _fireValue;
+
+    private FireMeterController fireMeterController;
 
     // Start is called before the first frame update
     void Start()
     {
         CurrentHearts = MaxHearts;
-        fireController = FireObject.GetComponent<FireController>();
+        fireController = FireObj.GetComponent<FireController>();
+        fireMeterController = FireMeterObj.GetComponent<FireMeterController>();
+        fireMeterController.MaxValue = MaxFireValue;
+        FireValue = MaxFireValue;
         SpawnSpider();
         SpawnSpider();
     }
@@ -36,7 +62,7 @@ public class NightController : MonoBehaviour
     }
 
     public void DamageFire(int damage) {
-        fireController.CurrentValue -= damage;
+        FireValue -= damage;
     }
 
     public void SacrificeHeart() {
@@ -45,6 +71,6 @@ public class NightController : MonoBehaviour
             return;
         }
         CurrentHearts--;
-        fireController.CurrentValue += 20;
+        FireValue += HeartRecoveryAmount;
     }
 }

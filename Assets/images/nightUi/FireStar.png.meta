@@ -1,22 +1,31 @@
 fileFormatVersion: 2
-guid: 2739ea466f8ba124d84597c6831e0104
+guid: f78680e6739c6b74b8ad09dd344ec598
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3992383239660249997
-    second: attack1-sheet_0
+      213: -7775561704179657026
+    second: FireStar_0
   - first:
-      213: 8523566678637487404
-    second: attack1-sheet_1
+      213: 7174496732098010633
+    second: FireStar_0
   - first:
-      213: 4564707371785508398
-    second: attack1-sheet_2
+      213: -5548562589306124640
+    second: FireStar_1
   - first:
-      213: -4671116899625109612
-    second: attack1-sheet_3
+      213: -8971355772484638811
+    second: FireStar_2
   - first:
-      213: 8700684394321640427
-    second: attack1-sheet_4
+      213: -7073554011105619371
+    second: FireStar_3
+  - first:
+      213: -715305885473228184
+    second: FireStar_4
+  - first:
+      213: -3695684235642909511
+    second: FireStar_5
+  - first:
+      213: 6200470339154323346
+    second: FireStar_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -79,7 +88,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -91,7 +100,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -102,106 +111,148 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: attack1-sheet_0
+      name: FireStar_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 15
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37cd3d898943898c0800000000000000
-      internalID: -3992383239660249997
+      spriteID: 90e17e604cee09360800000000000000
+      internalID: 7174496732098010633
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: attack1-sheet_1
+      name: FireStar_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 24
         y: 0
-        width: 32
-        height: 15
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c252b830cbac94670800000000000000
-      internalID: 8523566678637487404
+      spriteID: 0a6036af8bb8ff2b0800000000000000
+      internalID: -5548562589306124640
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: attack1-sheet_2
+      name: FireStar_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 48
         y: 0
-        width: 32
-        height: 15
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e26d1e67b29195f30800000000000000
-      internalID: 4564707371785508398
+      spriteID: 5a7276b05775f7380800000000000000
+      internalID: -8971355772484638811
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: attack1-sheet_3
+      name: FireStar_3
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 552928caa10b5dd90800000000000000
+      internalID: -7073554011105619371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireStar_4
       rect:
         serializedVersion: 2
         x: 96
         y: 0
-        width: 32
-        height: 15
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 497758dadebdc2fb0800000000000000
-      internalID: -4671116899625109612
+      spriteID: 86a3f964619b216f0800000000000000
+      internalID: -715305885473228184
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: attack1-sheet_4
+      name: FireStar_5
       rect:
         serializedVersion: 2
-        x: 128
+        x: 120
         y: 0
-        width: 32
-        height: 15
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: beb7352cb5a0fb870800000000000000
-      internalID: 8700684394321640427
+      spriteID: 9bc4e7ca4ca46bcc0800000000000000
+      internalID: -3695684235642909511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireStar_6
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 297a3a50cee7c0650800000000000000
+      internalID: 6200470339154323346
       vertices: []
       indices: 
       edges: []
