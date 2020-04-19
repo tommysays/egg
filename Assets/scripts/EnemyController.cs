@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
             _health = value;
             if (_health == 0) {
                 currentState = EnemyState.DYING;
+                nightController.CheckForWinCondition();
             }
         }
     }
@@ -29,7 +30,7 @@ public class EnemyController : MonoBehaviour
 
     public NightController nightController;
 
-    private EnemyState currentState = EnemyState.NONE;
+    public EnemyState currentState = EnemyState.NONE;
     private float attackTimer = 0f;
     private int _health;
     private Vector3 destination;
@@ -95,7 +96,6 @@ public class EnemyController : MonoBehaviour
         if (spriteRenderer.flipX != shouldFlip) {
             spriteRenderer.flipX = shouldFlip;
         }
-
     }
 
     public enum EnemyState {

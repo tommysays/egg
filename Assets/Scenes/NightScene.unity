@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 18.640625, y: 0}
+  m_AnchoredPosition: {x: 18.5, y: 0}
   m_SizeDelta: {x: -37.283997, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &417649491
@@ -311,6 +311,8 @@ MonoBehaviour:
   - {fileID: 8379744125335216105, guid: c41cea5e97e12304384686871ab37083, type: 3}
   - {fileID: 1290033946712388244, guid: d8d51b57b60042e4c81ba651eab9f409, type: 3}
   FireMeterObj: {fileID: 942802978}
+  Levels:
+  - {fileID: 4900000, guid: dcafd3cfe177a974892af35b9239b89f, type: 3}
   MaxFireValue: 100
   CurrentHearts: 0
   MaxHearts: 3
@@ -365,7 +367,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 171.362, y: -27.331299}
+  m_AnchoredPosition: {x: 171.5, y: -27.25}
   m_SizeDelta: {x: 257.6442, y: 38.907684}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &942802980
@@ -519,7 +521,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -124.741516, y: 0.008483887}
+  m_AnchoredPosition: {x: -124.5, y: 0}
   m_SizeDelta: {x: -249.98302, y: 0.016967773}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1176991055
