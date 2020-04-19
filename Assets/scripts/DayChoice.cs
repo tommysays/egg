@@ -31,8 +31,9 @@ public class DayChoice : MonoBehaviour, IPointerClickHandler
     {
         if ((DayScene.DayTime + ChoiceCost <= DayScene.TimeinaDay) && (dayScene.canvases[5].GetComponentInChildren<SunScript>().Moving == false))
         {
-            dayScene.MakeSelection(this.GetComponent<DayChoice>());
+            dayScene.canvases[dayScene.SelectedPanelNumber].transform.localPosition = dayScene.OffsetVector(dayScene.CanvasHoverStartingY);
 
+            dayScene.MakeSelection(this.GetComponent<DayChoice>());
 
                
         }

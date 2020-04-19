@@ -834,6 +834,7 @@ GameObject:
   - component: {fileID: 362354304}
   - component: {fileID: 362354306}
   - component: {fileID: 362354305}
+  - component: {fileID: 362354307}
   m_Layer: 0
   m_Name: PlayerImage
   m_TagString: Untagged
@@ -878,7 +879,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e2d5ef00f4ffa4443883b7fe8b580fe2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -896,6 +897,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 362354303}
   m_CullTransparentMesh: 0
+--- !u!114 &362354307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362354303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcbee237ab3c5374a9190f32fc7d6115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &426581364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,8 +1713,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 28.51, y: 1.6}
-  m_SizeDelta: {x: 492.82562, y: 99.29129}
+  m_AnchoredPosition: {x: 23.73, y: -1}
+  m_SizeDelta: {x: 550.0633, y: 104.497406}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &697457480
 MonoBehaviour:
@@ -4523,6 +4536,7 @@ GameObject:
   - component: {fileID: 2116981291}
   - component: {fileID: 2116981293}
   - component: {fileID: 2116981292}
+  - component: {fileID: 2116981294}
   m_Layer: 0
   m_Name: EggImage
   m_TagString: Untagged
@@ -4567,7 +4581,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: eaf78163f0972914dac4ccf8e9aafc86, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4585,6 +4599,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2116981290}
   m_CullTransparentMesh: 0
+--- !u!114 &2116981294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116981290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 720fe3af0eaad5f43b44cbd6213c8ef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites: []
+  timer: 0
+  animationtime: 0.3
+  frame: 0
 --- !u!1 &2140282839
 GameObject:
   m_ObjectHideFlags: 0

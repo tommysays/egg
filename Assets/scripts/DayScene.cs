@@ -74,10 +74,50 @@ public class DayScene : MonoBehaviour
     }
 
 
+    public Vector3 OffsetVector(float BaseY)
+    {
+        Vector3 vector3;
+        Vector3 localvector3 = canvases[0].transform.localPosition;
+        float yoffset = canvases[0].GetComponent<RectTransform>().rect.height;
+
+        vector3 = new Vector3(0, 0, 0);
+
+        if (SelectedPanelNumber == 0)
+        {
+            vector3  = new Vector3(localvector3.x, BaseY, localvector3.z);
+        }
+        else if (SelectedPanelNumber == 1)
+        {
+            localvector3 = canvases[1].transform.localPosition;
+            vector3 = new Vector3(localvector3.x, BaseY - yoffset, localvector3.z);
+        }
+        else if (SelectedPanelNumber == 2)
+        {
+            localvector3 = canvases[1].transform.localPosition;
+            vector3 = new Vector3(localvector3.x, BaseY - (yoffset*2), localvector3.z);
+        }
+        else if (SelectedPanelNumber == 7)
+        {
+            localvector3 = canvases[1].transform.localPosition;
+            vector3 = new Vector3(localvector3.x, BaseY - (yoffset * 3), localvector3.z);
+        }
+        else if (SelectedPanelNumber == 8)
+        {
+            localvector3 = canvases[1].transform.localPosition;
+            vector3 = new Vector3(localvector3.x, BaseY - (yoffset * 4), localvector3.z);
+        }
+        else if (SelectedPanelNumber == 4)
+        {
+            localvector3 = canvases[1].transform.localPosition;
+            vector3 = new Vector3(localvector3.x, BaseY - (yoffset * 5), localvector3.z);
+        }
+        return vector3;
+    }
+
     void Start()
     {
         Reset();
-        FadeCanvasStartingColor = this.GetComponentInParent<Image>().color;
+       // FadeCanvasStartingColor = new Color32(129, 218, 255, 251);
 
     }
 
@@ -94,24 +134,9 @@ public class DayScene : MonoBehaviour
             }
             else 
             {
-                Vector3 localvector3 = canvases[0].transform.localPosition;
-                float yoffset = canvases[0].GetComponent<RectTransform>().rect.height;
-
-                if (SelectedPanelNumber == 0)
-                {
-                canvases[0].transform.localPosition = Vector3.Lerp(new Vector3(localvector3.x, CanvasHoverStartingY, localvector3.z), new Vector3(localvector3.x, CanvasHoverEndingY, localvector3.z), CanvasHoverTimer / LagCanvasHoverTimer);
-                SelectPanel.transform.localPosition = canvases[0].transform.localPosition;
-                }
-                else if (SelectedPanelNumber == 1)
-                {
-                localvector3 = canvases[1].transform.localPosition;
-                canvases[1].transform.localPosition = Vector3.Lerp(new Vector3(localvector3.x, CanvasHoverStartingY - yoffset, localvector3.z), new Vector3(localvector3.x, CanvasHoverEndingY - yoffset, localvector3.z), CanvasHoverTimer / LagCanvasHoverTimer);
-                SelectPanel.transform.localPosition = canvases[1].transform.localPosition;
-
-                }
+                canvases[SelectedPanelNumber].transform.localPosition = Vector3.Lerp(OffsetVector(CanvasHoverStartingY), OffsetVector(CanvasHoverEndingY), CanvasHoverTimer / LagCanvasHoverTimer);
+                SelectPanel.transform.localPosition = canvases[SelectedPanelNumber].transform.localPosition;
                 CorrectSelectorIcon();
-                //etc for the others
-
             }
         } else if (CanvasHoverState == CanvasHoverStates.GoingDown)
         {
@@ -124,25 +149,8 @@ public class DayScene : MonoBehaviour
             else
             {
 
-                Vector3 localvector3 = canvases[0].transform.localPosition;
-                float yoffset = canvases[0].GetComponent<RectTransform>().rect.height;
-
-                if (SelectedPanelNumber == 0)
-                {
-                    canvases[0].transform.localPosition = Vector3.Lerp(new Vector3(localvector3.x, CanvasHoverEndingY, localvector3.z), new Vector3(localvector3.x, CanvasHoverStartingY, localvector3.z), CanvasHoverTimer / LagCanvasHoverTimer);
-                    SelectPanel.transform.localPosition = canvases[0].transform.localPosition;
-                }
-                else if (SelectedPanelNumber == 1)
-                {
-                    localvector3 = canvases[1].transform.localPosition;
-                    canvases[1].transform.localPosition = Vector3.Lerp(new Vector3(localvector3.x, CanvasHoverEndingY - yoffset, localvector3.z), new Vector3(localvector3.x, CanvasHoverStartingY - yoffset, localvector3.z), CanvasHoverTimer / LagCanvasHoverTimer);
-                    SelectPanel.transform.localPosition = canvases[1].transform.localPosition;
-
-                }
-
-
-                //etc for the others
-
+                canvases[SelectedPanelNumber].transform.localPosition = Vector3.Lerp(OffsetVector(CanvasHoverEndingY), OffsetVector(CanvasHoverStartingY), CanvasHoverTimer / LagCanvasHoverTimer);
+                SelectPanel.transform.localPosition = canvases[SelectedPanelNumber].transform.localPosition;
             }
             CorrectSelectorIcon();
         }
@@ -222,8 +230,11 @@ public class DayScene : MonoBehaviour
         if (Input.GetKeyUp("s") && canvases[5].GetComponentInChildren<SunScript>().Moving == false)
         {
 
+            canvases[SelectedPanelNumber].transform.localPosition = OffsetVector(CanvasHoverStartingY);
+
             if (SelectedPanelNumber == 0)
             {
+
                 SelectedPanelNumber = 1;
                 SelectPanel.transform.localPosition = canvases[1].transform.localPosition;
               }
@@ -262,6 +273,7 @@ public class DayScene : MonoBehaviour
 
         }else if (Input.GetKeyUp("w") && canvases[5].GetComponentInChildren<SunScript>().Moving == false)
         {
+            canvases[SelectedPanelNumber].transform.localPosition = OffsetVector(CanvasHoverStartingY);
 
             if (SelectedPanelNumber == 0)
             {
@@ -387,7 +399,7 @@ public class DayScene : MonoBehaviour
             DayScene.DayTime += dayChoice.ChoiceCost;
             canvases[5].GetComponentInChildren<SunScript>().Move(dayChoice.ChoiceCost);
             FindObjectOfType<MovingTextScript>().GetComponent<Text>().text = movingstring;
-            FindObjectOfType<MovingTextScript>().Move(vectorformovingtext, 1.0f, new Vector3(canvases[3].transform.position.x, canvases[3].transform.position.y + 100, canvases[3].transform.position.z), dayChoice.ChoiceCost);
+            FindObjectOfType<MovingTextScript>().Move(vectorformovingtext, 1.0f, new Vector3(canvases[3].transform.position.x, canvases[3].transform.position.y, canvases[3].transform.position.z), dayChoice.ChoiceCost);
             canvases[4].GetComponentInChildren<Text>().text = "Rest Until Dawn";
             if (DayTime < TimeinaDay)
             {

@@ -31,6 +31,8 @@ public class MovingTextScript : MonoBehaviour
                 transform.position = EndingPosition;
                 this.GetComponent<Text>().color = new Color32(50, 50, 50, 0);
                 dayScene.StartBackgroundColor = dayScene.canvases[9].GetComponent<Image>().color;
+                dayScene.canvases[3].GetComponentInChildren<Text>().text = "\tMagic Circle Max Health: " + DayScene.MaxHealth + "\n\tHeart Pouches: " + DayScene.MaxAccelerant +
+    "\n\tSacrificial Hearts: " + DayScene.AccelerantInHand + "\n\tMelee Attack: " + DayScene.MeleeWeaponDmg + "\n\tRanged Attack: " + DayScene.RangeWeaponDmg;
             }
             else
             {
@@ -39,6 +41,7 @@ public class MovingTextScript : MonoBehaviour
 
             }
         }
+        
     }
 
 
