@@ -1,0 +1,27 @@
+[Number of waves]
+
+[Wave start time],[Number of enemy types]
+[Enemy id]
+[delay],[count] [delay],[count] // etc.
+[Enemy id]
+[delay],[count] [delay],[count] // etc.
+// etc. per enemy type
+
+[Wave start time]
+[Enemy id]
+[delay],[count] [delay],[count] // etc.
+[Enemy id]
+[delay],[count] [delay],[count] // etc.
+// etc.
+
+// etc. per wave
+
+--------------------------
+
+The scanner will only pick up numbers including decimals, so
+it is ok to leave text in a level for note keeping.
+
+HOWEVER, do NOT add extra lines within a wave. Before/after a wave is fine.
+
+All enemy delays are based on the start of the wave, NOT the
+last delay.
