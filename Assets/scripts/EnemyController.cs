@@ -18,6 +18,7 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+    public int MaxHealth;
     public float Movespeed;
     public float Range;
     public int Damage;
@@ -39,6 +40,7 @@ public class EnemyController : MonoBehaviour
     void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
         destination = new Vector3(0, -0.1f, 0);
+        Health = MaxHealth;
         Flip();
     }
 
