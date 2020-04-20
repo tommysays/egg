@@ -321,6 +321,7 @@ MonoBehaviour:
   - {fileID: 8379744125335216105, guid: c41cea5e97e12304384686871ab37083, type: 3}
   - {fileID: 1290033946712388244, guid: d8d51b57b60042e4c81ba651eab9f409, type: 3}
   - {fileID: 2772505505635855273, guid: 9ef7851a590061b42b2d126750c3def9, type: 3}
+  - {fileID: 5539099370119699958, guid: f3472f3ec4b97c94687d758f27e1d3ba, type: 3}
   FireMeterObj: {fileID: 942802978}
   Levels:
   - {fileID: 4900000, guid: dcafd3cfe177a974892af35b9239b89f, type: 3}
