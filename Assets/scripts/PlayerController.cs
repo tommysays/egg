@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour
     private float buffDuration = 10f;
     private const float BUFF_MULTIPLIER = 1.2f;
 
+    // Player must be within this range to use sacrifice or buff.
+    private const float FIRE_RANGE = 1f;
+
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private MeleeController meleeController;
@@ -85,11 +88,12 @@ public class PlayerController : MonoBehaviour
                     animator.SetTrigger("rangedAttackTrigger");
                 }
                 StartCoroutine(RangedAttackSpawn(hasBuff));
-            } else if (Input.GetButtonDown("Fire3") && nightController.CurrentHearts > 0) {
+            } else if (Input.GetButtonDown("Fire3") && nightController.CurrentHearts > 0 &&
+                    transform.position.magnitude < FIRE_RANGE) {
                 currentState = PlayerState.SACRIFICING;
                 animator.SetTrigger("sacrificeTrigger");
                 StartCoroutine(SacrificeDelay());
-            } else if (Input.GetButtonDown("Fire4")) {
+            } else if (Input.GetButtonDown("Fire4") && transform.position.magnitude < FIRE_RANGE) {
                 // If we're able to spend fire for buff, then do so and set buff timer.
                 if (nightController.SpendFireForBuff()) {
                     currentState = PlayerState.BUFFING;
