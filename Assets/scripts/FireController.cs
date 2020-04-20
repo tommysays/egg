@@ -37,6 +37,9 @@ public class FireController : MonoBehaviour
 
     private void UpdateState(int value)
     {
+        if (spriteRenderers == null) {
+            return;;
+        }
         foreach (SpriteRenderer spriteRenderer in spriteRenderers) {
             Color color = spriteRenderer.color;
             color.a = (float)value / MaxValue;
