@@ -24,6 +24,11 @@ public class MeleeController : MonoBehaviour
             }
             HasHit = true;
             enemy.Health -= Damage;
+            Debug.Log("HIT");
+            if (collider.gameObject.TryGetComponent<BossController>(out BossController bossController))
+            {
+                bossController.GetHit();
+            }
         }
     }
 
