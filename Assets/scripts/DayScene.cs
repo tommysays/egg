@@ -42,6 +42,9 @@ public class DayScene : MonoBehaviour
 
     public static float LERPtimer = 0.0f;
     public float LagTimeFade = 3.5f;
+
+    public bool IntroFading = false;
+
     public Color32 FadeCanvasStartingColor;
     public Color32 FadeCanvasEndingColor = new Color32(0, 0, 0, 255);
     public Color32 StartBackgroundColor = new Color32(129, 218, 255, 251);
@@ -162,13 +165,27 @@ public void FinalTransitionOffset(int x)
 
     void Start()
     {
-        Reset();
-       // FadeCanvasStartingColor = new Color32(129, 218, 255, 251);
-      
+       Reset();
+       IntroFading = true;
     }
 
     void Update()
     {
+
+        if (IntroFading)
+        {
+            FinalTransitionTimer += Time.deltaTime;
+            if (FinalTransitionTimer >= LagFinalTransitionTime)
+            {
+                Debug.Log("Ding dong");
+                IntroFading = false;
+                FinalTransitionTimer = 0.0f;
+            }
+            else
+            {
+                canvases[10].GetComponent<Image>().color = Color32.Lerp(new Color32(255,255,255,255), new Color32(255, 255, 255, 0), FinalTransitionTimer / (LagFinalTransitionTime-1.5f));
+            }
+        }
 
         if (CanvasHoverState == CanvasHoverStates.GoingUp && (DayTime < TimeinaDay))
         {
