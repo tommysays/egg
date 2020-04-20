@@ -18,13 +18,13 @@ public class NightCanvasControls : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetKeyDown("tab"))
+        if (Input.GetButtonDown("Help"))
         {
             ControlsCanvas.SetActive(true);
             ControlsHelpText.SetActive(false);
 
         }
-        if (Input.GetKeyUp("tab"))
+        if (Input.GetButtonUp("Help"))
         {
             ControlsCanvas.SetActive(false);
             ControlsHelpText.SetActive(true);

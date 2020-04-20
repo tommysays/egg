@@ -44,6 +44,12 @@ public class MainMenuController : MonoBehaviour {
     }
 
     void Update() {
+        if (Input.GetButtonDown("Help")) {
+            ToggleTransition();
+        } else if (Input.GetButtonDown("Submit")) {
+            HandlePlayClicked();
+        }
+
         if (isTransitioning) {
             transitionTimer += Time.deltaTime;
             float ratio = transitionTimer / TRANSITION_DURATION;

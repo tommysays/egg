@@ -1,6 +1,6 @@
 [ ] hatchling art, animation
 [x] tab for controls on night
-[ ] title screen
+[x] title screen
 [ ] music
 	[ ] day
 	[ ] night
