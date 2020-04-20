@@ -86,6 +86,10 @@ public class DayScene : MonoBehaviour
         SelectPossible = true;
         SelectState = SelectStates.Displaying;
         SelectedPanelNumber = 0;
+        FadeCanvasStartingColor = new Color32(0, 0, 0, 0);
+        StartBackgroundColor = new Color32(129, 218, 255, 251);
+        EndBackgroundColor = new Color32(45, 79, 119, 255);
+        FadeCanvasEndingColor = new Color32(0, 0, 0, 255);
         SelectPanel.transform.localPosition = canvases[0].transform.localPosition;
         BackUpPanel.transform.localPosition = new Vector3(canvases[0].transform.localPosition.x, canvases[0].transform.localPosition.y - (BackUpPanel.GetComponent<RectTransform>().rect.height/2) -(canvases[0].GetComponent<RectTransform>().rect.height / 4), canvases[0].transform.localPosition.z);
         CanvasHoverState = CanvasHoverStates.GoingUp;
@@ -101,6 +105,9 @@ public class DayScene : MonoBehaviour
         LagFinalTransitionTime = 2.5f;
         ObjectFinalTransitionXoffset.Clear();
         ObjectFinalTransitionYoffset.Clear();
+        canvases[6].GetComponent<Image>().color = FadeCanvasStartingColor;
+        LERPtimer = 0;
+
         for (int x = 0; x < ObjectsMovingInFinalTransition.Length; x++)
         {
             ObjectFinalTransitionXoffset.Add(0f);
@@ -178,7 +185,6 @@ public void FinalTransitionOffset(int x)
             FinalTransitionTimer += Time.deltaTime;
             if (FinalTransitionTimer >= LagFinalTransitionTime)
             {
-                Debug.Log("Ding dong");
                 IntroFading = false;
                 FinalTransitionTimer = 0.0f;
             }
