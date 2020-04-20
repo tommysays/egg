@@ -20,7 +20,14 @@ public class PlayerController : MonoBehaviour
                         minY = -2f,
                         maxX = 3f,
                         maxY = 2f;
-    private const float stunDuration = 2f;
+    private const float stunDuration = 1f;
+    private float flashTimer = 0f;
+    private Color stunColor = Color.yellow;
+    private Color invulnerableColor = new Color(1f, 1f, 1f, 0.4f);
+    private Color invulnerableColor2 = new Color(1f, 1f, 1f, 0.6f);
+    private Color regularColor = Color.white;
+    private const float invulnerableDuration = 2f;
+    private bool isInvulnerable = false;
     private const float TOLERANCE = 0.0001f;
     private const float RANGED_X_OFFSET = 0.22f;
     private const float RANGED_Y_OFFSET = 0.41f;
@@ -90,6 +97,21 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        if (currentState == PlayerState.STUNNED) {
+            flashTimer += Time.deltaTime;
+            if ((int)(flashTimer * 10) % 2 == 0) {
+                spriteRenderer.color = stunColor;
+            } else {
+                spriteRenderer.color = regularColor;
+            }
+        } else if (isInvulnerable) {
+            flashTimer += Time.deltaTime;
+            if ((int)(flashTimer * 10) % 2 == 0) {
+                spriteRenderer.color = invulnerableColor;
+            } else {
+                spriteRenderer.color = invulnerableColor2;
+            }
+        }
     }
 
     public void DoneAttacking() {
@@ -97,24 +119,18 @@ public class PlayerController : MonoBehaviour
             currentState = PlayerState.NONE;
             meleeController.HasHit = false;
             meleeController.CheckForCollisions = false;
-        } else {
-            Debug.LogWarning("Animator triggered stop attacking, but player was not attacking. PlayerState = " + currentState.ToString());
         }
     }
 
     public void DoneSacrificing() {
         if (currentState == PlayerState.SACRIFICING) {
             currentState = PlayerState.NONE;
-        } else {
-            Debug.LogWarning("Animator triggered stop sacrifice, but player was not sacrificing. PlayerState = " + currentState.ToString());
         }
     }
 
     public void DoneBuffing() {
         if (currentState == PlayerState.BUFFING) {
             currentState = PlayerState.NONE;
-        } else {
-            Debug.LogWarning("Animator triggered stop buffing, but player was not buffing. PlayerState = " + currentState.ToString());
         }
     }
 
@@ -145,15 +161,27 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Stun() {
-        if (currentState != PlayerState.STUNNED) {
+        if (currentState != PlayerState.STUNNED && !isInvulnerable) {
             currentState = PlayerState.STUNNED;
+            isInvulnerable = true;
+            flashTimer = 0f;
+            animator.SetTrigger("stunnedTrigger");
             StartCoroutine(StunTimeout());
+            StartCoroutine(InvulnerabilityTimeout());
         }
     }
 
     private IEnumerator StunTimeout() {
         yield return new WaitForSeconds(stunDuration);
         currentState = PlayerState.NONE;
+        animator.SetTrigger("unStunnedTrigger");
+        spriteRenderer.color = regularColor;
+    }
+
+    private IEnumerator InvulnerabilityTimeout() {
+        yield return new WaitForSeconds(invulnerableDuration);
+        isInvulnerable = false;
+        spriteRenderer.color = regularColor;
     }
 
     private IEnumerator RangedAttackSpawn(bool isBuffed) {
