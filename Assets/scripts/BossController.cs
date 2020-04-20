@@ -6,22 +6,84 @@ public class BossController : EnemyController
 {
     // Start is called before the first frame update
     private Animator animator;
+
+    private float timer = 0f;
+    private float IdleToPlantingInterval = 4f;
+    private BossState bossState = BossState.SPAWNING;
+
     public override void Start()
     {
         animator = GetComponent<Animator>();
 
 
-        //currentState = EnemyState.SPAWNING;
-        //base.Start();
+        currentState = EnemyState.SPAWNING;
+        base.Start();
+        nightController = FindObjectOfType<NightController>(); ;
 
 
-
-        animator.SetTrigger("attackTrigger");
     }
 
-    // Update is called once per frame
+    public void GetHit()
+    {
+        animator.SetTrigger("attackedTrigger");
+    }
+
     public override void Update()
     {
-        
+        timer += Time.deltaTime;
+        if (bossState == BossState.IDLE)
+        {
+            if (timer > IdleToPlantingInterval)
+            {
+                timer = 0f;
+                animator.SetTrigger("plantTrigger");
+                bossState = BossState.PLANTING;
+            }
+        }
+        else if (bossState == BossState.PRODUCING)
+        {
+            if (timer > IdleToPlantingInterval)
+            {
+                timer = 0f;
+                animator.SetTrigger("plantTrigger");
+                ///Spawn enemy
+                int x = nightController.EnemyPrefabs.Length;
+
+                Vector3 spawnPosition = this.transform.position;
+                GameObject enemy = GameObject.Instantiate(nightController.EnemyPrefabs[(int)Random.Range(0,x-1)], spawnPosition, Quaternion.identity);
+                EnemyController enemyController = enemy.GetComponent<EnemyController>();
+                enemyController.nightController = nightController;
+                enemyController.PlayerObj = PlayerObj;
+                
+
+            }
+        }
+    }
+    
+
+    public void SpawningDone()
+    {
+        bossState = BossState.IDLE;
+        timer = 0f;
+    }
+
+    public void IdleDone()
+    {
+        bossState = BossState.PLANTING;
+        timer = 0f;
+    }
+
+    public void PlantingDone()
+    {
+        bossState = BossState.PRODUCING;
+        timer = 0f;
+    }
+
+    public enum BossState
+    {
+        SPAWNING,
+        IDLE,
+        PLANTING,
+        PRODUCING
     }
 }
