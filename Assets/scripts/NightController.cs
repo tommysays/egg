@@ -153,8 +153,7 @@ public class NightController : MonoBehaviour
             GameObject hatchling = GameObject.Instantiate(Hatchling, FireObj.transform.position, Quaternion.identity);
             DestroyObject(Egg);
             winDelay = 10f;
-            StartCoroutine(DelayedWinScreen());
-
+            this.ToMainMenu();
 
         }
         else
@@ -179,15 +178,10 @@ public class NightController : MonoBehaviour
 
     private IEnumerator LoadYourAsyncScene()
     {
-        if (GlobalDataScript.Day < 5)
-        {
+        
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("DayScene");
-        }
-        else
-        {
-            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MenuScene");
+     
 
-        }
         while (!asyncLoad.isDone)
         {
             yield return null;
