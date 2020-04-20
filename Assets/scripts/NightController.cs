@@ -66,7 +66,14 @@ public class NightController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CurrentHearts = MaxHearts;
+
+        MaxHearts = GlobalDataScript.MaxAccelerant;
+        CurrentHearts = GlobalDataScript.AccelerantInHand;
+        MaxFireValue = GlobalDataScript.MaxHealth;
+        PlayerObj.GetComponent<PlayerController>().MeleeDamage = GlobalDataScript.MeleeWeaponDmg;
+        PlayerObj.GetComponent<PlayerController>().RangedDamage = GlobalDataScript.RangeWeaponDmg;
+        //speed is handled in playercontroller start
+
         fireController = FireObj.GetComponent<FireController>();
         fireController.MaxValue = MaxFireValue;
         fireMeterController = FireMeterObj.GetComponent<FireMeterController>();
@@ -119,6 +126,12 @@ public class NightController : MonoBehaviour
 
         
         yield return new WaitForSeconds(winDelay);
+        GlobalDataScript.MaxAccelerant = MaxHearts;
+        GlobalDataScript.AccelerantInHand = CurrentHearts;
+        GlobalDataScript.MaxHealth = MaxFireValue;
+        GlobalDataScript.MeleeWeaponDmg = PlayerObj.GetComponent<PlayerController>().MeleeDamage;
+        GlobalDataScript.RangeWeaponDmg = PlayerObj.GetComponent<PlayerController>().RangedDamage;
+        GlobalDataScript.Day++;
         StartCoroutine(LoadYourAsyncScene());
         // TODO Do things on win, like show a win screen.
         Debug.Log("Player won the night!");

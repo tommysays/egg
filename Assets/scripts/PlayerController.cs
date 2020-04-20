@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public int MeleeDamage;
     public int RangedDamage;
 
-    private float movespeed = 1.2f;
+    private float movespeed;
     private const float minX = -3f,
                         minY = -2f,
                         maxX = 3f,
@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
         buffBarController = BuffBarObj.GetComponent<BuffBarController>();
         buffBarController.buffDuration = buffDuration;
         meleeController.Damage = MeleeDamage;
+        movespeed = 1.2f + (1.2f * (GlobalDataScript.SpeedBonus/100f));
     }
 
     void Update() {

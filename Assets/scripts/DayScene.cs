@@ -8,11 +8,11 @@ public class DayScene : MonoBehaviour
 {
     public static int DayTime = 0;
     public static int TimeinaDay = 8;
-    public static int MaxHealth = 100;
-    public static int MaxAccelerant = 3;
-    public static int AccelerantInHand = 2;
-    public static int MeleeWeaponDmg = 5;
-    public static int RangeWeaponDmg = 3;
+    public static int MaxHealth;
+    public static int MaxAccelerant;
+    public static int AccelerantInHand;
+    public static int MeleeWeaponDmg;
+    public static int RangeWeaponDmg;
     public static int SpeedBonus = 0;
     public Canvas[] canvases;
     public Text[] texts;
@@ -76,9 +76,20 @@ public class DayScene : MonoBehaviour
     public void Reset()
     {
         DayTime = 0;
+
+        DayScene.MaxAccelerant = GlobalDataScript.MaxAccelerant;
+        DayScene.AccelerantInHand = GlobalDataScript.AccelerantInHand;
+        DayScene.MaxHealth = GlobalDataScript.MaxHealth;
+        DayScene.MeleeWeaponDmg = GlobalDataScript.MeleeWeaponDmg;
+        DayScene.RangeWeaponDmg = GlobalDataScript.RangeWeaponDmg;
+        Day = GlobalDataScript.Day;
+
+
         this.canvases[3].GetComponentInChildren<Text>().text = "" + "\tMagic Circle Max Health: " + DayScene.MaxHealth + "\n\tHeart Pouches: " + DayScene.MaxAccelerant +
              "\n\tSacrificial Hearts: " + DayScene.AccelerantInHand + "\n\tMelee Attack: " + DayScene.MeleeWeaponDmg + "\n\tRanged Attack: " + DayScene.RangeWeaponDmg;
         SpeedBonus = (TimeinaDay - DayScene.DayTime) * 10;
+
+
         this.canvases[4].GetComponentInChildren<Text>().text = "Rest Until Dawn\n(Gain Temporary " + DayScene.SpeedBonus + "% Speed Bonus)";
         SelectPanel.SetActive(true);
         SelectorIcon.SetActive(true);
@@ -543,7 +554,15 @@ public void FinalTransitionOffset(int x)
     public void Fade()
     {
 
-        ;
+       
+
+        GlobalDataScript.MaxAccelerant = DayScene.MaxAccelerant;
+        GlobalDataScript.AccelerantInHand = DayScene.AccelerantInHand;
+        GlobalDataScript.MaxHealth = DayScene.MaxHealth;
+        GlobalDataScript.MeleeWeaponDmg = DayScene.MeleeWeaponDmg;
+        GlobalDataScript.RangeWeaponDmg = DayScene.RangeWeaponDmg;
+        GlobalDataScript.SpeedBonus = DayScene.SpeedBonus;
+
         StartCoroutine(LoadYourAsyncScene());
      
     }
