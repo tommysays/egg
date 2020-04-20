@@ -346,6 +346,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2206607701852565034}
+  - component: {fileID: 1377428280}
   m_Layer: 0
   m_Name: CenterRing
   m_TagString: Untagged
@@ -377,6 +378,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1377428280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3590487465652472972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e23346643f32ada4fb7bf03ab17eff27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FireObjs:
+  - {fileID: 3100223988769507587}
+  - {fileID: 564990325934758627}
+  - {fileID: 2147272799620625499}
+  - {fileID: 3128685917489541603}
+  - {fileID: 8464119651280196590}
+  - {fileID: 969331328708700593}
+  - {fileID: 6751842709337849045}
+  MaxValue: 0
 --- !u!212 &1578340822549167662
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -897,7 +919,7 @@ PrefabInstance:
     - target: {fileID: 1620463481693574538, guid: 280ebbbd980959f43a195e0700870c7f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.345
+      value: -0.29
       objectReference: {fileID: 0}
     - target: {fileID: 3702034114417817754, guid: 280ebbbd980959f43a195e0700870c7f,
         type: 3}
@@ -1044,6 +1066,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.157
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620463481693574538, guid: 280ebbbd980959f43a195e0700870c7f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.29
       objectReference: {fileID: 0}
     - target: {fileID: 3702034114417817754, guid: 280ebbbd980959f43a195e0700870c7f,
         type: 3}
