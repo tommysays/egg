@@ -10,6 +10,10 @@ public class NightController : MonoBehaviour
     public GameObject FireObj;
     public GameObject[] EnemyPrefabs;
     public GameObject FireMeterObj;
+    public GameObject EggsplosionObj;
+    public GameObject Egg;
+    public GameObject Hatchling;
+    public Sprite[] EggSprits;
     private FireController fireController;
     private FireMeterController fireMeterController;
     public TextAsset[] Levels;
@@ -57,6 +61,9 @@ public class NightController : MonoBehaviour
             } else if (value < 0) {
                 value = 0;
                 currentState = GameState.LOST;
+                //create eggsplosion
+                GameObject eggsplosion = GameObject.Instantiate(EggsplosionObj, FireObj.transform.position, Quaternion.identity);
+
                 shouldFade = true;
                 FadeBlackPanel.SetActive(true);
             }
@@ -96,10 +103,13 @@ public class NightController : MonoBehaviour
         fireMeterController = FireMeterObj.GetComponent<FireMeterController>();
         fireMeterController.MaxValue = MaxFireValue;
         FireValue = MaxFireValue;
-        // TODO Use night number instead of 0.
-        Level level = LevelLoader.LoadLevel(Levels[0]);
+        Level level = LevelLoader.LoadLevel(Levels[GlobalDataScript.Day]);
         FindLastEnemySpawnTime(level);
         LaunchLevel(level);
+        Egg.GetComponent<SpriteRenderer>().sprite = EggSprits[GlobalDataScript.Day];
+
+
+
     }
 
     #region Win condition
@@ -136,7 +146,21 @@ public class NightController : MonoBehaviour
             }
         }
         currentState = GameState.WON;
-        StartCoroutine(DelayedWinScreen());
+
+        if (GlobalDataScript.Day >= 4)
+        {
+                      
+            GameObject hatchling = GameObject.Instantiate(Hatchling, FireObj.transform.position, Quaternion.identity);
+            DestroyObject(Egg);
+            winDelay = 10f;
+            StartCoroutine(DelayedWinScreen());
+
+
+        }
+        else
+        {
+            StartCoroutine(DelayedWinScreen());
+        }
     }
 
     private IEnumerator DelayedWinScreen() {
@@ -151,13 +175,19 @@ public class NightController : MonoBehaviour
         GlobalDataScript.Day++;
         shouldFade = true;
         FadeWhitePanel.SetActive(true);
-        Debug.Log("Player won the night!");
     }
 
     private IEnumerator LoadYourAsyncScene()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("DayScene");
+        if (GlobalDataScript.Day < 5)
+        {
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("DayScene");
+        }
+        else
+        {
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MenuScene");
 
+        }
         while (!asyncLoad.isDone)
         {
             yield return null;
@@ -185,7 +215,9 @@ public class NightController : MonoBehaviour
                     if (fadeTimer > FADE_DURATION * 2) {
                         shouldFade = false;
                         fadeWhiteTextGroup.alpha = 0;
-                        StartCoroutine(LoadYourAsyncScene());
+                        
+                            StartCoroutine(LoadYourAsyncScene());
+                       
                     } else {
                         fadeWhiteTextGroup.alpha = 2f - fadeTimer / FADE_DURATION;
                     }

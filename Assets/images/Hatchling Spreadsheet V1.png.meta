@@ -1,0 +1,536 @@
+fileFormatVersion: 2
+guid: 4c7bd26dd1e3ab04b9ece8ee0b5fe7b9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7805911029333484613
+    second: Hatchling Spreadsheet V1_0
+  - first:
+      213: 4550977216369884795
+    second: Hatchling Spreadsheet V1_1
+  - first:
+      213: 4348642674571787981
+    second: Hatchling Spreadsheet V1_2
+  - first:
+      213: -7587437625446817752
+    second: Hatchling Spreadsheet V1_3
+  - first:
+      213: -4857653477423328948
+    second: Hatchling Spreadsheet V1_4
+  - first:
+      213: 5151490004011077764
+    second: Hatchling Spreadsheet V1_5
+  - first:
+      213: 423737114273128687
+    second: Hatchling Spreadsheet V1_6
+  - first:
+      213: -2076103645139876509
+    second: Hatchling Spreadsheet V1_7
+  - first:
+      213: -1568454558462369879
+    second: Hatchling Spreadsheet V1_8
+  - first:
+      213: 4348855697146822363
+    second: Hatchling Spreadsheet V1_9
+  - first:
+      213: 2831670823581197985
+    second: Hatchling Spreadsheet V1_10
+  - first:
+      213: 1256129487621276433
+    second: Hatchling Spreadsheet V1_11
+  - first:
+      213: 5962915104376843449
+    second: Hatchling Spreadsheet V1_12
+  - first:
+      213: 2833976933961413714
+    second: Hatchling Spreadsheet V1_13
+  - first:
+      213: 6605053838026028870
+    second: Hatchling Spreadsheet V1_14
+  - first:
+      213: 1389263269325902705
+    second: Hatchling Spreadsheet V1_15
+  - first:
+      213: -8650549901356096019
+    second: Hatchling Spreadsheet V1_16
+  - first:
+      213: 6236138148322998609
+    second: Hatchling Spreadsheet V1_17
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Hatchling Spreadsheet V1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbb164cb645dba390800000000000000
+      internalID: -7805911029333484613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hatchling Spreadsheet V1_1
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 0
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7e7f9a8aa1582f30800000000000000
+      internalID: 4550977216369884795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hatchling Spreadsheet V1_2
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 0
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dceb4f0f87b795c30800000000000000
+      internalID: 4348642674571787981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hatchling Spreadsheet V1_3
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 0
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8202fcbfda104b690800000000000000
+      internalID: -7587437625446817752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hatchling Spreadsheet V1_4
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 0
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c41dd3436e5269cb0800000000000000
+      internalID: -4857653477423328948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hatchling Spreadsheet V1_5
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 0
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4805e096dd4cd7740800000000000000
+      internalID: 5151490004011077764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hatchling Spreadsheet V1_6
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 0
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe0266e09aa61e500800000000000000
+      internalID: 423737114273128687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hatchling Spreadsheet V1_7
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 0
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3654b820cb23033e0800000000000000
+      internalID: -2076103645139876509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hatchling Spreadsheet V1_8
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 0
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9af128c93eabb3ae0800000000000000
+      internalID: -1568454558462369879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hatchling Spreadsheet V1_9
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 0
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdebedf173d3a5c30800000000000000
+      internalID: 4348855697146822363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hatchling Spreadsheet V1_10
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 0
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a625687c9d1c4720800000000000000
+      internalID: 2831670823581197985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hatchling Spreadsheet V1_11
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 0
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1134f8d1d1bae6110800000000000000
+      internalID: 1256129487621276433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hatchling Spreadsheet V1_12
+      rect:
+        serializedVersion: 2
+        x: 924
+        y: 0
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bc613ec1b780c250800000000000000
+      internalID: 5962915104376843449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hatchling Spreadsheet V1_13
+      rect:
+        serializedVersion: 2
+        x: 1001
+        y: 0
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 254bb62a10f445720800000000000000
+      internalID: 2833976933961413714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hatchling Spreadsheet V1_14
+      rect:
+        serializedVersion: 2
+        x: 1078
+        y: 0
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6473fd9787dd9ab50800000000000000
+      internalID: 6605053838026028870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hatchling Spreadsheet V1_15
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 0
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1731ba33597a74310800000000000000
+      internalID: 1389263269325902705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hatchling Spreadsheet V1_16
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 0
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de521e182b213f780800000000000000
+      internalID: -8650549901356096019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hatchling Spreadsheet V1_17
+      rect:
+        serializedVersion: 2
+        x: 1309
+        y: 0
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 159fd0dfa963b8650800000000000000
+      internalID: 6236138148322998609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
