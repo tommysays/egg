@@ -169,7 +169,7 @@ public class NightController : MonoBehaviour
     }
 
     private IEnumerator ToMainMenu() {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MainMenu");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MenuScene");
         while (!asyncLoad.isDone)
         {
             yield return null;
