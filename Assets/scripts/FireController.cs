@@ -8,6 +8,7 @@ using UnityEngine.UI;
 /// </summary>
 public class FireController : MonoBehaviour
 {
+    public GameObject[] FireObjs;
     public int MaxValue;
     public int CurrentValue {
         get {
@@ -15,8 +16,7 @@ public class FireController : MonoBehaviour
         }
         set {
             if (value < 0) {
-                // TODO Trigger game over.
-                Debug.Log("Fire was put out! Game over?");
+                // Game over is handled in NightController.
                 value = 0;
             }
             UpdateState(value);
@@ -25,68 +25,22 @@ public class FireController : MonoBehaviour
     }
     private int _currentValue;
 
-    public Sprite[] Sprites;
-
-    private FireState CurrentState {
-        get {
-            return _currentState;
-        }
-        set {
-            if (value != _currentState) {
-                UpdateSprite(value);
-            }
-            _currentState = value;
-        }
-    }
-    private FireState _currentState = FireState.FULL;
-
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer[] spriteRenderers;
 
     void Start() {
+        spriteRenderers = new SpriteRenderer[FireObjs.Length];
+        for (int i = 0; i < FireObjs.Length; i++) {
+            spriteRenderers[i] = FireObjs[i].GetComponent<SpriteRenderer>();
+        }
         CurrentValue = MaxValue;
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void UpdateState(int value)
     {
-        if (value <= MaxValue * 0.10) {
-            CurrentState = FireState.CRITICAL;
-        } else if (value <= MaxValue * 0.35) {
-            CurrentState = FireState.LOW;
-        } else if (value <= MaxValue * 0.75) {
-            CurrentState = FireState.MID;
-        } else if (value <= MaxValue * 0.95) {
-            CurrentState = FireState.HIGH;
-        } else {
-            CurrentState = FireState.FULL;
+        foreach (SpriteRenderer spriteRenderer in spriteRenderers) {
+            Color color = spriteRenderer.color;
+            color.a = (float)value / MaxValue;
+            spriteRenderer.color = color;
         }
-    }
-
-    private void UpdateSprite(FireState state) {
-        switch (state) {
-            case FireState.FULL:
-                spriteRenderer.sprite = Sprites[0];
-                break;
-            case FireState.HIGH:
-                spriteRenderer.sprite = Sprites[1];
-                break;
-            case FireState.MID:
-                spriteRenderer.sprite = Sprites[2];
-                break;
-            case FireState.LOW:
-                spriteRenderer.sprite = Sprites[3];
-                break;
-            case FireState.CRITICAL:
-                spriteRenderer.sprite = Sprites[4];
-                break;
-        }
-    }
-
-    public enum FireState {
-        FULL,
-        HIGH,
-        MID,
-        LOW,
-        CRITICAL
     }
 }

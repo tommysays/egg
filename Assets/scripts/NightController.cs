@@ -6,8 +6,10 @@ using UnityEngine.UI;
 public class NightController : MonoBehaviour
 {
     public GameObject PlayerObj;
+    public GameObject FireObj;
     public GameObject[] EnemyPrefabs;
     public GameObject FireMeterObj;
+    private FireController fireController;
     private FireMeterController fireMeterController;
     public TextAsset[] Levels;
     public Text HeartText;
@@ -47,6 +49,7 @@ public class NightController : MonoBehaviour
                 value = 0;
                 hasLost = true;
             }
+            fireController.CurrentValue = value;
             fireMeterController.NextValue = value;
             _fireValue = value;
         }
@@ -63,6 +66,8 @@ public class NightController : MonoBehaviour
     void Start()
     {
         CurrentHearts = MaxHearts;
+        fireController = FireObj.GetComponent<FireController>();
+        fireController.MaxValue = MaxFireValue;
         fireMeterController = FireMeterObj.GetComponent<FireMeterController>();
         fireMeterController.MaxValue = MaxFireValue;
         FireValue = MaxFireValue;

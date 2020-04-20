@@ -97,20 +97,17 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        if (currentState == PlayerState.STUNNED) {
+        if (currentState != PlayerState.STUNNED && isInvulnerable) {
             flashTimer += Time.deltaTime;
-            if ((int)(flashTimer * 10) % 2 == 0) {
-                spriteRenderer.color = stunColor;
-            } else {
-                spriteRenderer.color = regularColor;
-            }
-        } else if (isInvulnerable) {
-            flashTimer += Time.deltaTime;
+            int val = (int)(flashTimer * 10);
+            int mod = val % 2;
+            float prevA = spriteRenderer.color.a;
             if ((int)(flashTimer * 10) % 2 == 0) {
                 spriteRenderer.color = invulnerableColor;
             } else {
                 spriteRenderer.color = invulnerableColor2;
             }
+            //Debug.Log($"val:{val}, mod:{mod}, a:{spriteRenderer.color.a}, prevA:{prevA}");
         }
     }
 
@@ -137,6 +134,10 @@ public class PlayerController : MonoBehaviour
     private void HandleMovement() {
         float Horizontal = Input.GetAxisRaw("Horizontal");
         float Vertical = Input.GetAxisRaw("Vertical");
+
+        bool isMoving = Mathf.Abs(Horizontal) + Mathf.Abs(Vertical) > TOLERANCE;
+        animator.SetBool("isMoving", isMoving);
+
         Vector2 movement = new Vector2(Horizontal, Vertical) * movespeed * Time.deltaTime;
         Vector3 currentPosition = transform.position;
         float newX = currentPosition.x + movement.x;
