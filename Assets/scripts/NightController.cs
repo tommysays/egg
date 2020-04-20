@@ -12,6 +12,7 @@ public class NightController : MonoBehaviour
     public GameObject FireMeterObj;
     public GameObject EggsplosionObj;
     public GameObject Egg;
+    public GameObject Hatchling;
     public Sprite[] EggSprits;
     private FireController fireController;
     private FireMeterController fireMeterController;
@@ -106,6 +107,9 @@ public class NightController : MonoBehaviour
         FindLastEnemySpawnTime(level);
         LaunchLevel(level);
         Egg.GetComponent<SpriteRenderer>().sprite = EggSprits[GlobalDataScript.Day];
+
+
+
     }
 
     #region Win condition
@@ -145,7 +149,13 @@ public class NightController : MonoBehaviour
 
         if (GlobalDataScript.Day >= 4)
         {
-            //Hatch Egg
+                      
+            GameObject hatchling = GameObject.Instantiate(Hatchling, FireObj.transform.position, Quaternion.identity);
+            DestroyObject(Egg);
+            winDelay = 10f;
+            StartCoroutine(DelayedWinScreen());
+
+
         }
         else
         {
@@ -169,8 +179,15 @@ public class NightController : MonoBehaviour
 
     private IEnumerator LoadYourAsyncScene()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("DayScene");
+        if (GlobalDataScript.Day < 5)
+        {
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("DayScene");
+        }
+        else
+        {
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MenuScene");
 
+        }
         while (!asyncLoad.isDone)
         {
             yield return null;
@@ -198,7 +215,9 @@ public class NightController : MonoBehaviour
                     if (fadeTimer > FADE_DURATION * 2) {
                         shouldFade = false;
                         fadeWhiteTextGroup.alpha = 0;
-                        StartCoroutine(LoadYourAsyncScene());
+                        
+                            StartCoroutine(LoadYourAsyncScene());
+                       
                     } else {
                         fadeWhiteTextGroup.alpha = 2f - fadeTimer / FADE_DURATION;
                     }
