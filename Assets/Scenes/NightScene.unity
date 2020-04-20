@@ -325,6 +325,16 @@ MonoBehaviour:
   - {fileID: 2455505300425530626, guid: 51c3c586e84226b49a4f56c9c6c779cf, type: 3}
   - {fileID: 5539099370119699958, guid: f3472f3ec4b97c94687d758f27e1d3ba, type: 3}
   FireMeterObj: {fileID: 942802978}
+  EggsplosionObj: {fileID: 7569125319702833340, guid: b920b0632554da74a8626a51f10e984b,
+    type: 3}
+  Egg: {fileID: 1984969660}
+  EggSprits:
+  - {fileID: 3410735304782399738, guid: 11a60471857c59f4e875992f3f0bf82e, type: 3}
+  - {fileID: -6400876606819244545, guid: 11a60471857c59f4e875992f3f0bf82e, type: 3}
+  - {fileID: -5972384761875292332, guid: 11a60471857c59f4e875992f3f0bf82e, type: 3}
+  - {fileID: 2057529676507753635, guid: 11a60471857c59f4e875992f3f0bf82e, type: 3}
+  - {fileID: 4241644421338094208, guid: 11a60471857c59f4e875992f3f0bf82e, type: 3}
+  - {fileID: 6839989251076008622, guid: 11a60471857c59f4e875992f3f0bf82e, type: 3}
   Levels:
   - {fileID: 4900000, guid: dcafd3cfe177a974892af35b9239b89f, type: 3}
   - {fileID: 4900000, guid: 181077ba61e00fc40a303b38ba809458, type: 3}
@@ -459,6 +469,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1951805506, guid: 372dc768e93893b4a9b8d217d4665914,
     type: 3}
   m_PrefabInstance: {fileID: 9081842175533494684}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1984969660 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 880595404113172287, guid: af4c6194f8839da459f574ba9fc706ce,
+    type: 3}
+  m_PrefabInstance: {fileID: 3148802650521627272}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2143292894 stripped
 MonoBehaviour:

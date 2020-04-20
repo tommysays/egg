@@ -9,6 +9,7 @@ public class BossController : EnemyController
 
     private float timer = 0f;
     private float IdleToPlantingInterval = 4f;
+    private float ProducingEnemiesInterval = 2f;
     private BossState bossState = BossState.SPAWNING;
 
     public override void Start()
@@ -42,10 +43,9 @@ public class BossController : EnemyController
         }
         else if (bossState == BossState.PRODUCING)
         {
-            if (timer > IdleToPlantingInterval)
+            if (timer > ProducingEnemiesInterval)
             {
                 timer = 0f;
-                animator.SetTrigger("plantTrigger");
                 ///Spawn enemy
                 int x = nightController.EnemyPrefabs.Length;
 
@@ -53,9 +53,8 @@ public class BossController : EnemyController
                 GameObject enemy = GameObject.Instantiate(nightController.EnemyPrefabs[(int)Random.Range(0,x-1)], spawnPosition, Quaternion.identity);
                 EnemyController enemyController = enemy.GetComponent<EnemyController>();
                 enemyController.nightController = nightController;
-                enemyController.PlayerObj = PlayerObj;
+               
                 
-
             }
         }
     }
