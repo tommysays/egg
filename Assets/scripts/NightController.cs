@@ -14,6 +14,14 @@ public class NightController : MonoBehaviour
     private FireMeterController fireMeterController;
     public TextAsset[] Levels;
     public Text HeartText;
+    public GameObject FadeWhitePanel;
+    public GameObject FadeWhiteTextPanel;
+    public GameObject FadeBlackPanel;
+    public GameObject FadeBlackTextPanel;
+    private CanvasGroup fadeWhiteGroup;
+    private CanvasGroup fadeWhiteTextGroup;
+    private CanvasGroup fadeBlackGroup;
+    private CanvasGroup fadeBlackTextGroup;
 
     public int MaxFireValue;
 
@@ -41,14 +49,16 @@ public class NightController : MonoBehaviour
             return _fireValue;
         }
         set {
-            if (hasWon || hasLost) {
+            if (currentState != GameState.NONE) {
                 return;
             }
             if (value > MaxFireValue) {
                 value = MaxFireValue;
             } else if (value < 0) {
                 value = 0;
-                hasLost = true;
+                currentState = GameState.LOST;
+                shouldFade = true;
+                FadeBlackPanel.SetActive(true);
             }
             fireController.CurrentValue = value;
             fireMeterController.NextValue = value;
@@ -59,20 +69,27 @@ public class NightController : MonoBehaviour
 
     // Only enabled when the last monster spawns.
     public bool canWin = false;
-    public bool hasWon = false;
-    public bool hasLost = false;
-    private float winDelay = 1f;
+    public GameState currentState = GameState.NONE;
+    // It's jarring if you win right after defeating the last enemy, so we wait a bit before letting you know.
+    private float winDelay = 1.5f;
+
+    private bool shouldFade = false;
+    private float fadeTimer = 0f;
+    private const float FADE_DURATION = 1.5f;
 
     // Start is called before the first frame update
-    void Start()
-    {
-
+    void Start() {
         MaxHearts = GlobalDataScript.MaxAccelerant;
         CurrentHearts = GlobalDataScript.AccelerantInHand;
         MaxFireValue = GlobalDataScript.MaxHealth;
         PlayerObj.GetComponent<PlayerController>().MeleeDamage = GlobalDataScript.MeleeWeaponDmg;
         PlayerObj.GetComponent<PlayerController>().RangedDamage = GlobalDataScript.RangeWeaponDmg;
         //speed is handled in playercontroller start
+
+        fadeWhiteGroup = FadeWhitePanel.GetComponent<CanvasGroup>();
+        fadeWhiteTextGroup = FadeWhiteTextPanel.GetComponent<CanvasGroup>();
+        fadeBlackGroup = FadeBlackPanel.GetComponent<CanvasGroup>();
+        fadeBlackTextGroup = FadeBlackTextPanel.GetComponent<CanvasGroup>();
 
         fireController = FireObj.GetComponent<FireController>();
         fireController.MaxValue = MaxFireValue;
@@ -108,7 +125,7 @@ public class NightController : MonoBehaviour
     }
 
     public void CheckForWinCondition() {
-        if (!canWin || hasWon || hasLost) {
+        if (!canWin || currentState != GameState.NONE) {
             return;
         }
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -118,7 +135,7 @@ public class NightController : MonoBehaviour
                 return;
             }
         }
-        hasWon = true;
+        currentState = GameState.WON;
         StartCoroutine(DelayedWinScreen());
     }
 
@@ -132,18 +149,62 @@ public class NightController : MonoBehaviour
         GlobalDataScript.MeleeWeaponDmg = PlayerObj.GetComponent<PlayerController>().MeleeDamage;
         GlobalDataScript.RangeWeaponDmg = PlayerObj.GetComponent<PlayerController>().RangedDamage;
         GlobalDataScript.Day++;
-        StartCoroutine(LoadYourAsyncScene());
-        // TODO Do things on win, like show a win screen.
+        shouldFade = true;
+        FadeWhitePanel.SetActive(true);
         Debug.Log("Player won the night!");
     }
 
-    IEnumerator LoadYourAsyncScene()
+    private IEnumerator LoadYourAsyncScene()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("DayScene");
 
         while (!asyncLoad.isDone)
         {
             yield return null;
+        }
+    }
+
+    public void ToMainMenuButtonHandler() {
+        StartCoroutine(ToMainMenu());
+    }
+
+    private IEnumerator ToMainMenu() {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MainMenu");
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
+
+    void Update() {
+        if (shouldFade) {
+            fadeTimer += Time.deltaTime;
+            if (fadeTimer > FADE_DURATION) {
+                if (currentState == GameState.WON) {
+                    fadeWhiteGroup.alpha = 1f;
+                    if (fadeTimer > FADE_DURATION * 2) {
+                        shouldFade = false;
+                        fadeWhiteTextGroup.alpha = 0;
+                        StartCoroutine(LoadYourAsyncScene());
+                    } else {
+                        fadeWhiteTextGroup.alpha = 2f - fadeTimer / FADE_DURATION;
+                    }
+                } else {
+                    fadeBlackGroup.alpha = 1f;
+                    if (fadeTimer > FADE_DURATION * 2) {
+                        shouldFade = false;
+                        fadeBlackTextGroup.alpha = 1f;
+                    } else {
+                        fadeBlackTextGroup.alpha = fadeTimer / FADE_DURATION - 1f;
+                    }
+                }
+            } else {
+                if (currentState == GameState.WON) {
+                    fadeWhiteGroup.alpha = fadeTimer / FADE_DURATION;
+                } else {
+                    fadeBlackGroup.alpha = fadeTimer / FADE_DURATION;
+                }
+            }
         }
     }
 
@@ -178,7 +239,7 @@ public class NightController : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         // Don't bother spawning if the player already lost.
-        if (hasLost) {
+        if (currentState == GameState.LOST) {
             yield break;
         }
 
@@ -226,4 +287,10 @@ public class NightController : MonoBehaviour
     }
 
     #endregion
+
+    public enum GameState {
+        NONE,
+        WON,
+        LOST
+    }
 }
