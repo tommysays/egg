@@ -16,7 +16,7 @@ public class MoleController : EnemyController
     {
         if (startTimer > StartDelay) {
             if (currentState == EnemyState.SPAWNING) {
-                currentState = EnemyState.NONE;
+                currentState = EnemyState.APPROACHING_FIRE;
             }
             base.Update();
         } else {

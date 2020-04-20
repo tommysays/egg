@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class NightController : MonoBehaviour
 {
+    public GameObject PlayerObj;
     public GameObject[] EnemyPrefabs;
     public GameObject FireMeterObj;
     private FireMeterController fireMeterController;
@@ -132,13 +133,16 @@ public class NightController : MonoBehaviour
     }
 
     private void LaunchEnemyPayload(EnemyPayload enemyPayload) {
-        GameObject enemyPrefab = EnemyPrefabs[enemyPayload.EnemyId];
+        int id = enemyPayload.EnemyId;
+        GameObject enemyPrefab = EnemyPrefabs[id];
+        // This list determines which enemies can chase player.
+        bool attachPlayerObject = id == 0 || id == 1;
         foreach (Vector2 spawn in enemyPayload.Spawns) {
-            StartCoroutine(LaunchEnemy(enemyPrefab, (int)spawn.x, (int)spawn.y));
+            StartCoroutine(LaunchEnemy(enemyPrefab, (int)spawn.x, (int)spawn.y, attachPlayerObject));
         }
     }
 
-    private IEnumerator LaunchEnemy(GameObject prefab, int delay, int count) {
+    private IEnumerator LaunchEnemy(GameObject prefab, int delay, int count, bool attachPlayerObject) {
         yield return new WaitForSeconds(delay);
 
         // Don't bother spawning if the player already lost.
@@ -147,18 +151,21 @@ public class NightController : MonoBehaviour
         }
 
         while (count --> 0) {
-            SpawnFromSide(prefab);
+            SpawnFromSide(prefab, attachPlayerObject);
         }
     }
 
-    private void SpawnFromSide(GameObject prefab) {
+    private void SpawnFromSide(GameObject prefab, bool attachPlayerObject) {
         // TODO make it only spawn from the edges.
         float x = Random.value < 0.5f ? -3 : 3;
         float y = Random.Range(-2f, 2f);
         Vector3 spawnPosition = new Vector3(x, y, y);
-        GameObject spider = GameObject.Instantiate(prefab, spawnPosition, Quaternion.identity);
-        EnemyController enemyController = spider.GetComponent<EnemyController>();
+        GameObject enemy = GameObject.Instantiate(prefab, spawnPosition, Quaternion.identity);
+        EnemyController enemyController = enemy.GetComponent<EnemyController>();
         enemyController.nightController = this;
+        if (attachPlayerObject) {
+            enemyController.PlayerObj = PlayerObj;
+        }
     }
 
     #endregion
