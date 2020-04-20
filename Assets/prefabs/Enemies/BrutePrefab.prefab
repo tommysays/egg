@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12759d24b48e0694cad563820cd49923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DelayAfterHittingPlayer: 2.5
   MaxHealth: 12
   Movespeed: 0.6
   Range: 0.7
