@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DayScene : MonoBehaviour
 {
@@ -413,12 +414,12 @@ public void FinalTransitionOffset(int x)
             }
             else
             {
-                Egg.transform.localPosition = Vector3.Lerp(EggPriorLocation, new Vector3(0, 0, 0), FinalTransitionTimer / LagFinalTransitionTime);
+                Egg.transform.localPosition = Vector3.Lerp(EggPriorLocation, new Vector3(2, 80, 0), FinalTransitionTimer / LagFinalTransitionTime);
 
                 for (int x = 0; x < ObjectsMovingInFinalTransition.Length; x++)
                 {
                     Vector3 startVector = new Vector3(EggPriorLocation.x + ObjectFinalTransitionXoffset[x], EggPriorLocation.y + ObjectFinalTransitionYoffset[x], 0);
-                    Vector3 endVector = new Vector3(0 + ObjectFinalTransitionXoffset[x], 0 + ObjectFinalTransitionYoffset[x], 0);
+                    Vector3 endVector = new Vector3(0 + ObjectFinalTransitionXoffset[x] + 2, 0 + ObjectFinalTransitionYoffset[x]+ 80, 0);
                     ObjectsMovingInFinalTransition[x].transform.localPosition = Vector3.Lerp(startVector, endVector, FinalTransitionTimer / LagFinalTransitionTime);
                 }
 
@@ -535,10 +536,22 @@ public void FinalTransitionOffset(int x)
 
     public void Fade()
     {
-        
 
-
-
-        //return to night scene
+        ;
+        StartCoroutine(LoadYourAsyncScene());
+     
     }
+
+    IEnumerator LoadYourAsyncScene()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("NightScene");
+
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
+
+
 }

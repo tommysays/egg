@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class NightController : MonoBehaviour
 {
@@ -115,9 +116,22 @@ public class NightController : MonoBehaviour
     }
 
     private IEnumerator DelayedWinScreen() {
+
+        
         yield return new WaitForSeconds(winDelay);
+        StartCoroutine(LoadYourAsyncScene());
         // TODO Do things on win, like show a win screen.
         Debug.Log("Player won the night!");
+    }
+
+    IEnumerator LoadYourAsyncScene()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("DayScene");
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
     }
 
     #endregion
