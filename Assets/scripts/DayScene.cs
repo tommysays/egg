@@ -61,7 +61,7 @@ public class DayScene : MonoBehaviour
 
     public bool FinalTransition = false;
     public float FinalTransitionTimer = 0.0f;
-    public float LagFinalTransitionTime = 3.0f;
+    public float LagFinalTransitionTime = 2.5f;
     public GameObject[] ObjectsMovingInFinalTransition;
     List<float> ObjectFinalTransitionXoffset = new List<float>();
     List<float> ObjectFinalTransitionYoffset = new List<float>();
@@ -97,7 +97,7 @@ public class DayScene : MonoBehaviour
         EggWiggling = false;
         FinalTransition = false;
         FinalTransitionTimer = 0.0f;
-        LagFinalTransitionTime = 3.0f;
+        LagFinalTransitionTime = 2.5f;
         ObjectFinalTransitionXoffset.Clear();
         ObjectFinalTransitionYoffset.Clear();
         for (int x = 0; x < ObjectsMovingInFinalTransition.Length; x++)
@@ -183,7 +183,7 @@ public void FinalTransitionOffset(int x)
             }
             else
             {
-                canvases[10].GetComponent<Image>().color = Color32.Lerp(new Color32(255,255,255,255), new Color32(255, 255, 255, 0), FinalTransitionTimer / (LagFinalTransitionTime-1.5f));
+                canvases[10].GetComponent<Image>().color = Color32.Lerp(new Color32(255,255,255,255), new Color32(255, 255, 255, 0), FinalTransitionTimer / (LagFinalTransitionTime-1f));
             }
         }
 
