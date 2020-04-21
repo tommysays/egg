@@ -93,7 +93,7 @@ public class DayScene : MonoBehaviour
         this.canvases[4].GetComponentInChildren<Text>().text = "Rest Until Dawn\n(Gain Temporary " + DayScene.SpeedBonus + "% Speed Bonus)";
         SelectPanel.SetActive(true);
         SelectorIcon.SetActive(true);
-        texts[0].text = " Day " + Day + " -- " + (TimeinaDay - DayTime) + " Hours Until Nightfall"; ;
+        texts[0].text = " Day " + (Day+1) + " -- " + (TimeinaDay - DayTime) + " Hours Until Nightfall"; ;
         SelectPossible = true;
         SelectState = SelectStates.Displaying;
         SelectedPanelNumber = 0;
@@ -274,15 +274,15 @@ public void FinalTransitionOffset(int x)
         }
         if (TimeinaDay <= DayTime)
         {
-            texts[0].text = " Night " + Day + " Arrives"; ;
+            texts[0].text = " Night Arrives"; ;
 
         }
         else
         {
-            texts[0].text = " Day " + Day + " -- " + (TimeinaDay - DayTime) + " Hours Until Nightfall"; ;
+            texts[0].text = " Day " + (Day+1) + " -- " + (TimeinaDay - DayTime) + " Hours Until Nightfall"; ;
             if ((TimeinaDay - DayTime) == 1)
             {
-                texts[0].text = " Day " + Day + " -- " + "1 Hour Until Nightfall"; ;
+                texts[0].text = " Day " + (Day+1) + " -- " + "1 Hour Until Nightfall"; ;
 
             }
         }
