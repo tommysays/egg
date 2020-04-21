@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5682546840948239769}
   - component: {fileID: 5312457449727232730}
   - component: {fileID: 5224666031543909328}
-  - component: {fileID: 1743542873267762495}
+  - component: {fileID: 5457707200920908667}
   m_Layer: 0
   m_Name: EggBreak
   m_TagString: Untagged
@@ -103,7 +103,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1743542873267762495
+--- !u!114 &5457707200920908667
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,6 +112,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7569125319702833340}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea92d0402a7e25d48a9548a07f121967, type: 3}
+  m_Script: {fileID: 11500000, guid: ec372437fa97c964485e6f70aad425ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
