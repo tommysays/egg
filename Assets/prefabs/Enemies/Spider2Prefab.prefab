@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DelayAfterHittingPlayer: 2
-  MaxHealth: 10
+  MaxHealth: 11
   Movespeed: 1.1
   Range: 0.4
   Damage: 6

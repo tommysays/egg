@@ -295,6 +295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 630007197}
   - component: {fileID: 630007196}
+  - component: {fileID: 630007198}
   m_Layer: 0
   m_Name: GameRunner
   m_TagString: Untagged
@@ -340,6 +341,9 @@ MonoBehaviour:
   Levels:
   - {fileID: 4900000, guid: dcafd3cfe177a974892af35b9239b89f, type: 3}
   - {fileID: 4900000, guid: 181077ba61e00fc40a303b38ba809458, type: 3}
+  - {fileID: 4900000, guid: f05737450ff522c46aa7f6f5c5d965ff, type: 3}
+  - {fileID: 4900000, guid: 578775e8f99dd70488cf0cd00d281a93, type: 3}
+  - {fileID: 4900000, guid: 80bbc3e9e7eabba48bea86c5b48b2efd, type: 3}
   HeartText: {fileID: 2143292894}
   FadeWhitePanel: {fileID: 1951805506}
   FadeWhiteTextPanel: {fileID: 1337249096}
@@ -364,6 +368,102 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &630007198
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630007195}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &652283843 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 652283843, guid: 372dc768e93893b4a9b8d217d4665914,
@@ -563,9 +663,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 594341044384126286, guid: 45acf813dc362e84285a6164aba318e7,
         type: 3}
+      propertyPath: SoundEffects.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 594341044384126286, guid: 45acf813dc362e84285a6164aba318e7,
+        type: 3}
       propertyPath: NightControllerObj
       value: 
       objectReference: {fileID: 630007195}
+    - target: {fileID: 594341044384126286, guid: 45acf813dc362e84285a6164aba318e7,
+        type: 3}
+      propertyPath: SoundEffects.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 250a94c8f2b95964cbf6b8daa06cf740, type: 3}
+    - target: {fileID: 594341044384126286, guid: 45acf813dc362e84285a6164aba318e7,
+        type: 3}
+      propertyPath: SoundEffects.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: f8a103b675045204bb89aa485572f94d, type: 3}
+    - target: {fileID: 594341044384126286, guid: 45acf813dc362e84285a6164aba318e7,
+        type: 3}
+      propertyPath: SoundEffects.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 71e371a969d78324e8076bedc1ea9e13, type: 3}
+    - target: {fileID: 594341044384126286, guid: 45acf813dc362e84285a6164aba318e7,
+        type: 3}
+      propertyPath: SoundEffects.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: a2099dd1182842c4188de445445cf82e, type: 3}
+    - target: {fileID: 594341044384126286, guid: 45acf813dc362e84285a6164aba318e7,
+        type: 3}
+      propertyPath: SoundEffects.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 431a33c02ef6d3042b586b6746ed461e, type: 3}
     - target: {fileID: 1249330461036286075, guid: 45acf813dc362e84285a6164aba318e7,
         type: 3}
       propertyPath: m_Controller

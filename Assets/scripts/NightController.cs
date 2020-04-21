@@ -107,9 +107,6 @@ public class NightController : MonoBehaviour
         FindLastEnemySpawnTime(level);
         LaunchLevel(level);
         Egg.GetComponent<SpriteRenderer>().sprite = EggSprits[GlobalDataScript.Day];
-
-
-
     }
 
     #region Win condition
@@ -150,11 +147,10 @@ public class NightController : MonoBehaviour
         if (GlobalDataScript.Day >= 4)
         {
                       
-            GameObject hatchling = GameObject.Instantiate(Hatchling, FireObj.transform.position, Quaternion.identity);
-            DestroyObject(Egg);
+            GameObject.Instantiate(Hatchling, FireObj.transform.position, Quaternion.identity);
+            Destroy(Egg);
             winDelay = 10f;
-            this.ToMainMenu();
-
+            ToMainMenu();
         }
         else
         {

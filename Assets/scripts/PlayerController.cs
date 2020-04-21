@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public GameObject NightControllerObj;
     public GameObject BuffBarObj;
     public GameObject PlayerSpriteObj;
+    public AudioClip[] SoundEffects;
     public PlayerState currentState = PlayerState.NONE;
 
     public int MeleeDamage;
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour
                         minY = -2f,
                         maxX = 3f,
                         maxY = 2f;
-    private const float stunDuration = 1f;
+    private const float stunDuration = 0.5f;
     private float flashTimer = 0f;
     private Color stunColor = Color.yellow;
     private Color invulnerableColor = new Color(1f, 1f, 1f, 0.4f);
@@ -48,9 +49,11 @@ public class PlayerController : MonoBehaviour
     private MeleeController meleeController;
     private NightController nightController;
     private BuffBarController buffBarController;
+    private AudioSource audioSource;
 
     void Start() {
         nightController = NightControllerObj.GetComponent<NightController>();
+        audioSource = NightControllerObj.GetComponent<AudioSource>();
         spriteRenderer = PlayerSpriteObj.GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         meleeController = MeleeColliderObj.GetComponent<MeleeController>();
@@ -78,6 +81,7 @@ public class PlayerController : MonoBehaviour
                 }
                 meleeController.HasHit = false;
                 meleeController.CheckForCollisions = true;
+                audioSource.PlayOneShot(SoundEffects[0]);
                 // Update damage in case this is a buffed attack.
                 meleeController.Damage = (int)Mathf.Round(MeleeDamage * (hasBuff ? BUFF_MULTIPLIER : 1));
             } else if (Input.GetButtonDown("Fire2")) {
@@ -168,6 +172,7 @@ public class PlayerController : MonoBehaviour
 
     public void Stun() {
         if (currentState != PlayerState.STUNNED && !isInvulnerable) {
+            audioSource.PlayOneShot(SoundEffects[4]);
             currentState = PlayerState.STUNNED;
             isInvulnerable = true;
             flashTimer = 0f;
@@ -196,6 +201,7 @@ public class PlayerController : MonoBehaviour
             // Player was interrupted before they could complete ranged attack.
             yield break;
         }
+        audioSource.PlayOneShot(SoundEffects[1]);
         Vector3 position = transform.position;
         float deltaX = spriteRenderer.flipX ? -RANGED_X_OFFSET : RANGED_X_OFFSET;
         Vector3 newPosition = new Vector3(position.x + deltaX, position.y + RANGED_Y_OFFSET, position.z);
@@ -215,6 +221,7 @@ public class PlayerController : MonoBehaviour
             // Player was interrupted before they could complete sacrifice.
             yield break;
         }
+        audioSource.PlayOneShot(SoundEffects[2]);
         nightController.SacrificeHeart();
     }
 
@@ -226,6 +233,7 @@ public class PlayerController : MonoBehaviour
         }
         BuffBarObj.SetActive(true);
         buffTimer = buffDuration;
+        audioSource.PlayOneShot(SoundEffects[3]);
         buffBarController.ResetBuff();
     }
 

@@ -14,7 +14,9 @@ public class LevelLoader {
             for (int payloadIndex = 0; payloadIndex < numEnemyPayloads; payloadIndex++) {
                 EnemyPayload payload = new EnemyPayload();
                 payload.EnemyId = scanner.nextInt();
+                
                 string line = scanner.nextLine();
+                Debug.Log($"payload index {payloadIndex}, line {line}");
                 Scanner payloadScanner = new Scanner(line);
                 while (payloadScanner.hasNextNumber()) {
                     float delay = payloadScanner.nextFloat();

@@ -1,0 +1,17 @@
+2
+
+Has basic enemies
+2, 3
+0
+0,2 5,2 12,2
+1
+0,1 16,1
+2
+5,1
+
+Has spider and upgraded spider
+20, 2
+0
+0,2 8,1 12,2
+3
+0,1 7,1 10,1

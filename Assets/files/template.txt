@@ -25,3 +25,18 @@ HOWEVER, do NOT add extra lines within a wave. Before/after a wave is fine.
 
 All enemy delays are based on the start of the wave, NOT the
 last delay.
+
+-----
+
+The table below informs how to scale waves, assuming no upgrades.
+Difficulty roughly corresponds to seconds it takes to chase/kill enemy, assuming no upgrades.
+Difficulty table:
+
+Name	Id	Difficulty
+Spider	0	1.5
+Brute	1	3
+Mole	2	2.5
+Spider2	3	2.5
+Brute2	4	5
+Mole2	5	4
+Boss	6	7
