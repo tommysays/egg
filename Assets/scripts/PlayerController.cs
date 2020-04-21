@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
     void Start() {
         nightController = NightControllerObj.GetComponent<NightController>();
-        audioSource = NightControllerObj.GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         spriteRenderer = PlayerSpriteObj.GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         meleeController = MeleeColliderObj.GetComponent<MeleeController>();
@@ -64,6 +64,10 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update() {
+        if (nightController.currentState != NightController.GameState.NONE)
+        {
+            return;
+        }
         bool hasBuff = buffTimer > 0f;
         if (hasBuff) {
             buffTimer -= Time.deltaTime;
@@ -171,7 +175,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Stun() {
-        if (currentState != PlayerState.STUNNED && !isInvulnerable) {
+        if (currentState != PlayerState.STUNNED && !isInvulnerable && nightController.currentState != NightController.GameState.LOST) {
             audioSource.PlayOneShot(SoundEffects[4]);
             currentState = PlayerState.STUNNED;
             isInvulnerable = true;
