@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DelayAfterHittingPlayer: 0
-  MaxHealth: 25
+  MaxHealth: 35
   Movespeed: 0
   Range: 0
   Damage: 0

@@ -64,6 +64,7 @@ public class NightController : MonoBehaviour
                 currentState = GameState.LOST;
                 //create eggsplosion
                 GameObject eggsplosion = GameObject.Instantiate(EggsplosionObj, FireObj.transform.position, Quaternion.identity);
+                StartCoroutine(DestroyEgg(.2f));
 
                 shouldFade = true;
                 FadeBlackPanel.SetActive(true);
@@ -130,6 +131,12 @@ public class NightController : MonoBehaviour
             }
         }
         StartCoroutine(EnableWinCondition(maxSpawnTime));
+    }
+
+    private IEnumerator DestroyEgg(float DestoryDelay)
+    {
+        yield return new WaitForSeconds(DestoryDelay);
+        Destroy(Egg);
     }
 
     private IEnumerator EnableWinCondition(float maxSpawnTime) {
