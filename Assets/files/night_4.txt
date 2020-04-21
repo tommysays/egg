@@ -7,5 +7,6 @@ A single boss vine, then two
 
 Last battle
 Boss vines
-17
+17,1
+6
 4,3
