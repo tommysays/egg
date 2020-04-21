@@ -17,7 +17,7 @@ public class BossController : EnemyController
         animator = GetComponent<Animator>();
 
 
-        currentState = EnemyState.SPAWNING;
+        currentState = EnemyState.REACHED_FIRE;
         base.Start();
         nightController = FindObjectOfType<NightController>(); ;
 
@@ -26,11 +26,28 @@ public class BossController : EnemyController
 
     public void GetHit()
     {
+        Debug.Log(Health);
         animator.SetTrigger("attackedTrigger");
     }
 
     public override void Update()
     {
+
+
+        if (currentState == EnemyState.DYING)
+        {
+            deathFadeTimer += Time.deltaTime;
+            if (deathFadeTimer >= deathFadeSeconds)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Color color = spriteRenderer.color;
+            color.a = 1 - (deathFadeTimer / deathFadeSeconds);
+            spriteRenderer.color = color;
+            return;
+        }
+
         timer += Time.deltaTime;
         if (bossState == BossState.IDLE)
         {
@@ -50,7 +67,7 @@ public class BossController : EnemyController
                 int x = nightController.EnemyPrefabs.Length;
 
                 Vector3 spawnPosition = this.transform.position;
-                GameObject enemy = GameObject.Instantiate(nightController.EnemyPrefabs[(int)Random.Range(0,x-1)], spawnPosition, Quaternion.identity);
+                GameObject enemy = GameObject.Instantiate(nightController.EnemyPrefabs[(int)Random.Range(0,x-2)], spawnPosition, Quaternion.identity);
                 EnemyController enemyController = enemy.GetComponent<EnemyController>();
                 enemyController.nightController = nightController;
                
