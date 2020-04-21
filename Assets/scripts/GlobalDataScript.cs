@@ -11,7 +11,7 @@ public class GlobalDataScript
     public static int MeleeWeaponDmg = 5;
     public static int RangeWeaponDmg = 3;
     public static int SpeedBonus = 0;
-    public static int Day = 4;
+    public static int Day = 0;
 
   
 }
