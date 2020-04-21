@@ -349,6 +349,7 @@ MonoBehaviour:
   FadeWhiteTextPanel: {fileID: 1337249096}
   FadeBlackPanel: {fileID: 1539562610}
   FadeBlackTextPanel: {fileID: 652283843}
+  audioBossMusic: {fileID: 8300000, guid: d0dd64545d20c2e42a75508dacad1ba2, type: 3}
   MaxFireValue: 100
   MaxHearts: 3
   BuffCost: 15
@@ -378,11 +379,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 9ad9c320454cdc743ad7dbf5011fb107, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

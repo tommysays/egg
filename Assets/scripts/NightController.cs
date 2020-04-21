@@ -27,6 +27,7 @@ public class NightController : MonoBehaviour
     private CanvasGroup fadeBlackGroup;
     private CanvasGroup fadeBlackTextGroup;
 
+    public AudioClip audioBossMusic;
     public int MaxFireValue;
 
     public int CurrentHearts {
@@ -103,6 +104,11 @@ public class NightController : MonoBehaviour
         fireMeterController = FireMeterObj.GetComponent<FireMeterController>();
         fireMeterController.MaxValue = MaxFireValue;
         FireValue = MaxFireValue;
+        if (GlobalDataScript.Day >= 4) {
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.clip = audioBossMusic;
+            audio.Play();
+        }
         Level level = LevelLoader.LoadLevel(Levels[GlobalDataScript.Day]);
         FindLastEnemySpawnTime(level);
         LaunchLevel(level);

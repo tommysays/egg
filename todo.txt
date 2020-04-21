@@ -1,4 +1,4 @@
-[ ] hatchling art, animation
+[x] hatchling art, animation
 [x] tab for controls on night
 [x] title screen
 [ ] music
@@ -13,7 +13,7 @@
 	[ ] player buff
 	[ ] generic "ui option selected" (for day, main menu, any buttons)
 
-[ ] Nights 3-5
+[x] Nights 3-5
 	- nights 3-5 can use stronger versions of enemies
 	- night 5 has boss
 
