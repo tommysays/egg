@@ -1,14 +1,9 @@
-2
+1
 
-The first wave has a couple gentle waves of increasing spiders,
+A couple gentle waves of increasing spiders,
 introduces a brute, then has a final mini-wave of brute plus spiders
 2, 2
 0
 0,1 4,2 15,2
 1
 10,1 15,1
-
-Spider rush
-22, 1
-0
-0,2 4,2

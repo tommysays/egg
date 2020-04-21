@@ -874,6 +874,23 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 77.325806
       objectReference: {fileID: 0}
+    - target: {fileID: 1360889124367705762, guid: 372dc768e93893b4a9b8d217d4665914,
+        type: 3}
+      propertyPath: m_Text
+      value: 'Start button or Tab
+
+        for controls'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1360889124367705762, guid: 372dc768e93893b4a9b8d217d4665914,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091993745525619016, guid: 372dc768e93893b4a9b8d217d4665914,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9081842175271147066, guid: 372dc768e93893b4a9b8d217d4665914,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -983,6 +1000,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NightCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 9152752214338586852, guid: 372dc768e93893b4a9b8d217d4665914,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -333.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9152752214338586852, guid: 372dc768e93893b4a9b8d217d4665914,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 357.9832
+      objectReference: {fileID: 0}
+    - target: {fileID: 9152752214338586852, guid: 372dc768e93893b4a9b8d217d4665914,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 330.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 372dc768e93893b4a9b8d217d4665914, type: 3}
