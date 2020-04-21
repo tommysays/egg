@@ -258,12 +258,13 @@ public class NightController : MonoBehaviour
         GameObject enemyPrefab = EnemyPrefabs[id];
         // This list determines which enemies can chase player.
         bool attachPlayerObject = id == 0 || id == 1;
+        bool isBoss = id == 6;
         foreach (Vector2 spawn in enemyPayload.Spawns) {
-            StartCoroutine(LaunchEnemy(enemyPrefab, (int)spawn.x, (int)spawn.y, attachPlayerObject));
+            StartCoroutine(LaunchEnemy(enemyPrefab, (int)spawn.x, (int)spawn.y, attachPlayerObject, isBoss));
         }
     }
 
-    private IEnumerator LaunchEnemy(GameObject prefab, int delay, int count, bool attachPlayerObject) {
+    private IEnumerator LaunchEnemy(GameObject prefab, int delay, int count, bool attachPlayerObject, bool isBoss) {
         yield return new WaitForSeconds(delay);
 
         // Don't bother spawning if the player already lost.
@@ -272,14 +273,17 @@ public class NightController : MonoBehaviour
         }
 
         while (count --> 0) {
-            SpawnFromSide(prefab, attachPlayerObject);
+            SpawnFromSide(prefab, attachPlayerObject, isBoss);
         }
     }
 
-    private void SpawnFromSide(GameObject prefab, bool attachPlayerObject) {
-        // TODO make it only spawn from the edges.
+    private void SpawnFromSide(GameObject prefab, bool attachPlayerObject, bool isBoss) {
         float x = Random.value < 0.5f ? -3 : 3;
         float y = Random.Range(-2f, 2f);
+        if (isBoss) {
+            x = Random.value < 0.5f ? -2.5f : 2.5f;
+            y = Random.Range(-1.5f, 1.5f);
+        }
         Vector3 spawnPosition = new Vector3(x, y, y);
         GameObject enemy = GameObject.Instantiate(prefab, spawnPosition, Quaternion.identity);
         EnemyController enemyController = enemy.GetComponent<EnemyController>();
